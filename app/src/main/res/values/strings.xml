@@ -1,9 +1,20 @@
 <resources>
     <string name="app_name">Mobile ATM</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+
+    <string name="drawer_home">Home</string>
+    <string name="drawer_history">History</string>
+    <string name="drawer_recharge">Recharge</string>
+    <string name="drawer_deals">Deals</string>
+    <string name="drawer_personal">Personal</string>
+    <string name="drawer_account">Account</string>
+    <string name="drawer_settings">Settings</string>
+
+    <string name="action_help">Help</string>
+    <string name="action_report">Report</string>
 </resources>
