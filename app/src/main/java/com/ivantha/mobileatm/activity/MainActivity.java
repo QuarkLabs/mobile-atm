@@ -1,5 +1,6 @@
 package com.ivantha.mobileatm.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -87,7 +88,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_help) {
             return true;
         } else if (id == R.id.action_report) {
-
+            // TMP: Open Login Page //
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
