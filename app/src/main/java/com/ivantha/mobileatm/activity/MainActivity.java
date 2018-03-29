@@ -1,8 +1,12 @@
-package com.ivantha.mobileatm;
+package com.ivantha.mobileatm.activity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,8 +17,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.ivantha.mobileatm.R;
+import com.ivantha.mobileatm.fragment.AccountFragment;
+import com.ivantha.mobileatm.fragment.DealsFragment;
+import com.ivantha.mobileatm.fragment.HistoryFragment;
+import com.ivantha.mobileatm.fragment.HomeFragment;
+import com.ivantha.mobileatm.fragment.RechargeFragment;
+import com.ivantha.mobileatm.fragment.SettingsFragment;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        HomeFragment.OnFragmentInteractionListener, RechargeFragment.OnFragmentInteractionListener,
+        DealsFragment.OnFragmentInteractionListener, HistoryFragment.OnFragmentInteractionListener,
+        AccountFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +86,7 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_help) {
             return true;
-        }else if (id == R.id.action_report){
+        } else if (id == R.id.action_report) {
 
         }
 
@@ -81,25 +96,70 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment fragment;
+
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            fragment = HomeFragment.newInstance("p1", "p2");
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
         } else if (id == R.id.nav_recharge) {
-
+            fragment = RechargeFragment.newInstance("p1", "p2");
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
         } else if (id == R.id.nav_deals) {
-
+            fragment = DealsFragment.newInstance("p1", "p2");
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
         } else if (id == R.id.nav_history) {
-
+            fragment = HistoryFragment.newInstance("p1", "p2");
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
         } else if (id == R.id.nav_account) {
-
+            fragment = AccountFragment.newInstance("p1", "p2");
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
         } else if (id == R.id.nav_settings) {
-
+            fragment = SettingsFragment.newInstance("p1", "p2");
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onAccountFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onDealsFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onHistoryFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onHomeFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onRechargeFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onSettingsFragmentInteraction(Uri uri) {
+
     }
 }
