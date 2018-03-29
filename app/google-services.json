@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "649361971729",
+    "firebase_url": "https://mobile-atm-10742.firebaseio.com",
+    "project_id": "mobile-atm-10742",
+    "storage_bucket": "mobile-atm-10742.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649361971729:android:8766064422b6e7a2",
+        "android_client_info": {
+          "package_name": "com.ivantha.mobileatm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "649361971729-9b5eujp0bj31b35ccfm9v4mq2ed63hqr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ivantha.mobileatm",
+            "certificate_hash": "f4d0be3d883f963f41de747f28375c62a4010eb3"
+          }
+        },
+        {
+          "client_id": "649361971729-u8mae0unh7ed6ufu2olc64o3d517v5dv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8LUscQyoKb9S6fdB2qOcnzRDf6CaXVSY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649361971729-u8mae0unh7ed6ufu2olc64o3d517v5dv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
