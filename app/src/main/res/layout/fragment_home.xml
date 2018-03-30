@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="0.0"
-            android:textAlignment="viewStart"
+            android:textAlignment="center"
             android:textSize="70sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteY="76dp" />
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="LKR"
-            android:textAlignment="viewStart"
+            android:textAlignment="center"
             android:textSize="30sp"
             tools:layout_editor_absoluteX="93dp"
             tools:layout_editor_absoluteY="246dp" />
