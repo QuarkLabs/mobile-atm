@@ -47,7 +47,7 @@ public class DealsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_deals, container, false);
 
-        recyclerView = view.findViewById(R.id.dealsRecyclerView);
+        recyclerView = view.findViewById(R.id.dealRecyclerView);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
 

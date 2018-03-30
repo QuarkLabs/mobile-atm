@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/signup_button"
         android:layout_width="303dp"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_blue_dark"
+        android:background="@color/colorPrimary"
         android:text="SIGN UP"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,14 +58,14 @@
         app:layout_constraintTop_toBottomOf="@+id/spendingLimitTextView"
         app:layout_constraintVertical_bias="0.059" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/login_button"
         android:layout_width="303dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_blue_dark"
+        android:background="@color/colorPrimary"
         android:text="LOGIN"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"

@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     android:layout_margin="4dp"
     tools:context=".fragment.DealsFragment"
-    android:id="@+id/dealsRecyclerView">
+    android:id="@+id/dealRecyclerView">
 
 </android.support.v7.widget.RecyclerView>
