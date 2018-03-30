@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,14 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.ivantha.mobileatm.R;
+import com.ivantha.mobileatm.common.Session;
 import com.ivantha.mobileatm.fragment.AccountFragment;
 import com.ivantha.mobileatm.fragment.DealsFragment;
 import com.ivantha.mobileatm.fragment.HistoryFragment;
 import com.ivantha.mobileatm.fragment.HomeFragment;
 import com.ivantha.mobileatm.fragment.RechargeFragment;
 import com.ivantha.mobileatm.fragment.SettingsFragment;
+import com.ivantha.mobileatm.model.Settings;
+import com.ivantha.mobileatm.model.User;
+
+import org.jetbrains.annotations.Contract;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -32,10 +36,38 @@ public class MainActivity extends AppCompatActivity
         DealsFragment.OnFragmentInteractionListener, HistoryFragment.OnFragmentInteractionListener,
         AccountFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener {
 
+    public static MainActivity mainActivity;
+
+    public MainActivity() {
+
+    }
+
+    @Contract(pure = true)
+    public static MainActivity getMainActivity() {
+        return mainActivity;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        // Emulating the login
+        User user = new User();
+        user.setFirstName("Oshan");
+        user.setLastName("Mudannayake");
+        user.setEmail("oshan.ivantha@gmail.com");
+        user.setPassword("oshan1234");
+        user.setSeed("VKN9VNOZUFMWMMIUVZLVXUTFPWRGQQBNGEYWBHUYQMXNKPDDFAHVQJKCQRHUYHGRBLCIHDWHUGK99FHCI");
+
+        Settings settings = new Settings();
+        user.setSettings(settings);
+
+        Session.currentUser = user;
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -58,6 +90,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mainActivity = MainActivity.this;
     }
 
     @Override
@@ -103,33 +137,23 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        Fragment fragment;
+        Fragment fragment = null;
 
         if (id == R.id.nav_home) {
             fragment = HomeFragment.newInstance("p1", "p2");
-            transaction.replace(R.id.container, fragment);
-            transaction.commit();
         } else if (id == R.id.nav_recharge) {
             fragment = RechargeFragment.newInstance("p1", "p2");
-            transaction.replace(R.id.container, fragment);
-            transaction.commit();
         } else if (id == R.id.nav_deals) {
             fragment = DealsFragment.newInstance("p1", "p2");
-            transaction.replace(R.id.container, fragment);
-            transaction.commit();
         } else if (id == R.id.nav_history) {
             fragment = HistoryFragment.newInstance("p1", "p2");
-            transaction.replace(R.id.container, fragment);
-            transaction.commit();
         } else if (id == R.id.nav_account) {
             fragment = AccountFragment.newInstance("p1", "p2");
-            transaction.replace(R.id.container, fragment);
-            transaction.commit();
         } else if (id == R.id.nav_settings) {
             fragment = SettingsFragment.newInstance("p1", "p2");
-            transaction.replace(R.id.container, fragment);
-            transaction.commit();
         }
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
