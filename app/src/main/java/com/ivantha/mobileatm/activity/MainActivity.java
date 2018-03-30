@@ -1,7 +1,6 @@
 package com.ivantha.mobileatm.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -35,11 +34,7 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.Contract;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        HomeFragment.OnFragmentInteractionListener, RechargeFragment.OnFragmentInteractionListener,
-        DealsFragment.OnFragmentInteractionListener, HistoryFragment.OnFragmentInteractionListener,
-        AccountFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private static MainActivity mainActivity;
 
@@ -107,7 +102,7 @@ public class MainActivity extends AppCompatActivity
         // Set Home as default view
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        Fragment fragment = HomeFragment.newInstance("p1", "p2");
+        Fragment fragment = HomeFragment.newInstance();
         transaction.replace(R.id.container, fragment);
         transaction.commit();
 
@@ -161,17 +156,17 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
 
         if (id == R.id.nav_home) {
-            fragment = HomeFragment.newInstance("p1", "p2");
+            fragment = HomeFragment.newInstance();
         } else if (id == R.id.nav_recharge) {
-            fragment = RechargeFragment.newInstance("p1", "p2");
+            fragment = RechargeFragment.newInstance();
         } else if (id == R.id.nav_deals) {
-            fragment = DealsFragment.newInstance("p1", "p2");
+            fragment = DealsFragment.newInstance();
         } else if (id == R.id.nav_history) {
-            fragment = HistoryFragment.newInstance("p1", "p2");
+            fragment = HistoryFragment.newInstance();
         } else if (id == R.id.nav_account) {
-            fragment = AccountFragment.newInstance("p1", "p2");
+            fragment = AccountFragment.newInstance();
         } else if (id == R.id.nav_settings) {
-            fragment = SettingsFragment.newInstance("p1", "p2");
+            fragment = SettingsFragment.newInstance();
         }
         transaction.replace(R.id.container, fragment);
         transaction.commit();
@@ -194,35 +189,5 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    @Override
-    public void onAccountFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onDealsFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onHistoryFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onHomeFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onRechargeFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onSettingsFragmentInteraction(Uri uri) {
-
     }
 }
