@@ -1,5 +1,6 @@
 package com.ivantha.mobileatm.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,9 +14,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.ivantha.mobileatm.R;
 import com.ivantha.mobileatm.common.Session;
@@ -25,6 +28,7 @@ import com.ivantha.mobileatm.fragment.HistoryFragment;
 import com.ivantha.mobileatm.fragment.HomeFragment;
 import com.ivantha.mobileatm.fragment.RechargeFragment;
 import com.ivantha.mobileatm.fragment.SettingsFragment;
+import com.ivantha.mobileatm.model.Account;
 import com.ivantha.mobileatm.model.Settings;
 import com.ivantha.mobileatm.model.User;
 
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         DealsFragment.OnFragmentInteractionListener, HistoryFragment.OnFragmentInteractionListener,
         AccountFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener {
 
-    public static MainActivity mainActivity;
+    private static MainActivity mainActivity;
 
     public MainActivity() {
 
@@ -60,10 +64,14 @@ public class MainActivity extends AppCompatActivity
         user.setPassword("oshan1234");
         user.setSeed("VKN9VNOZUFMWMMIUVZLVXUTFPWRGQQBNGEYWBHUYQMXNKPDDFAHVQJKCQRHUYHGRBLCIHDWHUGK99FHCI");
 
+        Account account = new Account();
+        account.setSpendingLimit(4570);
+        user.setAccount(account);
+
         Settings settings = new Settings();
         user.setSettings(settings);
 
-        Session.currentUser = user;
+        Session.setCurrentUser(user);
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         setContentView(R.layout.activity_main);
@@ -92,6 +100,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mainActivity = MainActivity.this;
+
+        // Set Home as default view
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment fragment = HomeFragment.newInstance("p1", "p2");
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
     }
 
     @Override

@@ -6,7 +6,7 @@ public class User {
     private String email;
     private String password;
     private String seed;
-
+    private Account account;
     private Settings settings;
 
     public User() {
@@ -50,6 +50,14 @@ public class User {
 
     public void setSeed(String seed) {
         this.seed = seed;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Settings getSettings() {

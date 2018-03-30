@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ivantha.mobileatm.R;
+import com.ivantha.mobileatm.common.Session;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,8 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private TextView spendingLimitTextView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -62,10 +66,14 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        spendingLimitTextView = view.findViewById(R.id.spendingLimitTextView);
+        spendingLimitTextView.setText(Session.getCurrentUser().getAccount().getSpendingLimit().toString());
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
