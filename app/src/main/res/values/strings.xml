@@ -10,6 +10,7 @@
 
     <string name="drawer_home">Home</string>
     <string name="drawer_history">History</string>
+    <string name="drawer_payments">Payments</string>
     <string name="drawer_recharge">Recharge</string>
     <string name="drawer_deals">Deals</string>
     <string name="drawer_personal">Personal</string>

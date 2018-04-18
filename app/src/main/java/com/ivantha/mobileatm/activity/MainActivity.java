@@ -25,6 +25,7 @@ import com.ivantha.mobileatm.fragment.AccountFragment;
 import com.ivantha.mobileatm.fragment.DealsFragment;
 import com.ivantha.mobileatm.fragment.HistoryFragment;
 import com.ivantha.mobileatm.fragment.HomeFragment;
+import com.ivantha.mobileatm.fragment.PaymentsFragment;
 import com.ivantha.mobileatm.fragment.RechargeFragment;
 import com.ivantha.mobileatm.fragment.SettingsFragment;
 import com.ivantha.mobileatm.model.Account;
@@ -157,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_home) {
             fragment = HomeFragment.newInstance();
+        } else if (id == R.id.nav_payments) {
+            fragment = PaymentsFragment.newInstance();
         } else if (id == R.id.nav_recharge) {
             fragment = RechargeFragment.newInstance();
         } else if (id == R.id.nav_deals) {

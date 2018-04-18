@@ -7,5 +7,6 @@
     android:padding="4dp"
     tools:context=".fragment.HistoryFragment"
     android:id="@+id/transactionRecyclerView">
+    
 
 </android.support.v7.widget.RecyclerView>
