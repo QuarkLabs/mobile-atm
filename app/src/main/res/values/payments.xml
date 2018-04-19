@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="payments_categories">
+        <item>-- Select a Category --</item>
+        <item>Airlines</item>
+        <item>Automobile</item>
+        <item>Cable - TV</item>
+        <item>Clubs and Societies</item>
+        <item>Disaster Relief Donations</item>
+        <item>Donations / Charity</item>
+        <item>Education</item>
+        <item>Electricity</item>
+        <item>Financial Institutions</item>
+        <item>Government Payments</item>
+        <item>Higher Education Institutes</item>
+        <item>Hospitals</item>
+        <item>Insurance</item>
+        <item>Internet</item>
+        <item>Leasing</item>
+        <item>Leisure and Entertainment</item>
+        <item>Logistics</item>
+        <item>Mobile Money</item>
+        <item>Online Shopping</item>
+        <item>Opticians</item>
+        <item>Professional Associations</item>
+        <item>Real Estate</item>
+        <item>Stock Brokers</item>
+        <item>Telephone</item>
+        <item>Travel Services</item>
+        <item>Water Board</item>
+    </string-array>
+
+    <string-array name="payment_payees">
+        <item>-- Select a Payee --</item>
+        <item>DIALOG</item>
+        <item>LANKA BELL</item>
+        <item>MOBITEL</item>
+        <item>AIR ASIA</item>
+        <item>SRI LANKAN AIRLINES</item>
+        <item>Mobitel</item>
+    </string-array>
+
+</resources>
