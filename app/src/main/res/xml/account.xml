@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.preference.PreferenceCategory
-            android:title="Accounts">
+    <android.support.v7.preference.PreferenceCategory android:title="Accounts">
 
         <android.support.v7.preference.EditTextPreference
-                android:key="account_seed"
-                android:title="Account Seed"
-                android:summary="Enter your IOTA seed"
-                android:dialogMessage="Enter your IOTA seed"
-                android:defaultValue="" />
+            android:defaultValue=""
+            android:dialogMessage="Enter your IOTA seed"
+            android:key="account_seed"
+            android:summary="Enter your IOTA seed"
+            android:title="Account Seed" />
         <android.support.v7.preference.EditTextPreference
-                android:key="account_email"
-                android:title="Email"
-                android:summary="Enter your email address"
-                android:dialogMessage="Enter your email address"
-                android:defaultValue="" />
+            android:defaultValue=""
+            android:dialogMessage="Enter your email address"
+            android:key="account_email"
+            android:summary="Enter your email address"
+            android:title="Email" />
         <android.support.v7.preference.EditTextPreference
-                android:key="account_display_name"
-                android:title="Display Name"
-                android:summary="Enter your name to display"
-                android:dialogMessage="Enter your name to display"
-                android:defaultValue="" />
+            android:defaultValue=""
+            android:dialogMessage="Enter your name to display"
+            android:key="account_display_name"
+            android:summary="Enter your name to display"
+            android:title="Display Name" />
         <android.support.v7.preference.EditTextPreference
-                android:key="account_payment_limit"
-                android:title="Payment Limit"
-                android:summary="Enter a maximum limit for a payment"
-                android:dialogMessage="Enter a maximum limit for a payment"
-                android:defaultValue="10" />
+            android:defaultValue="10"
+            android:dialogMessage="Enter a maximum limit for a payment"
+            android:key="account_payment_limit"
+            android:summary="Enter a maximum limit for a payment"
+            android:title="Payment Limit" />
 
     </android.support.v7.preference.PreferenceCategory>
 

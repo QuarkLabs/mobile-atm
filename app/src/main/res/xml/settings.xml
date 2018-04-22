@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.preference.PreferenceCategory
-        android:title="General">
+    <android.support.v7.preference.PreferenceCategory android:title="General">
 
         <android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
             android:key="settings_notifications"
-            android:title="Notifications"
             android:summary="Display notifications"
-            android:defaultValue="true" />
+            android:title="Notifications" />
 
         <android.support.v7.preference.SwitchPreferenceCompat
-                android:key="settings_sound"
-                android:title="Sound"
-                android:summary="Notification sound"
-                android:defaultValue="true" />
+            android:defaultValue="true"
+            android:key="settings_sound"
+            android:summary="Notification sound"
+            android:title="Sound" />
 
     </android.support.v7.preference.PreferenceCategory>
 
