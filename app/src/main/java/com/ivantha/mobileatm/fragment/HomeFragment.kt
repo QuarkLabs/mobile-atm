@@ -31,4 +31,4 @@ class HomeFragment : Fragment() {
         }
     }
 
-}// Required empty public constructor
+}

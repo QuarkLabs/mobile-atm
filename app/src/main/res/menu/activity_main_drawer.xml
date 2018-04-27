@@ -13,10 +13,6 @@
             android:icon="@drawable/ic_payment_black_24dp"
             android:title="@string/drawer_payments" />
         <item
-            android:id="@+id/nav_recharge"
-            android:icon="@drawable/ic_attach_money_black_24dp"
-            android:title="@string/drawer_recharge" />
-        <item
             android:id="@+id/nav_deals"
             android:icon="@drawable/ic_local_atm_black_24dp"
             android:title="@string/drawer_deals" />

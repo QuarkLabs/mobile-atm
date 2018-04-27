@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.common.Session
@@ -23,10 +24,17 @@ import com.ivantha.mobileatm.model.User
 import com.squareup.picasso.Picasso
 import org.jetbrains.annotations.Contract
 
+
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         ////////////////////////////////////////////////////////////////////////////////////////////
         // Emulating the login
@@ -63,8 +71,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
-        val toggle = ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -124,20 +131,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val transaction = manager.beginTransaction()
         var fragment: Fragment? = null
 
-        if (id == R.id.nav_home) {
-            fragment = HomeFragment.newInstance()
-        } else if (id == R.id.nav_payments) {
-            fragment = PaymentsFragment.newInstance()
-        } else if (id == R.id.nav_recharge) {
-            fragment = RechargeFragment.newInstance()
-        } else if (id == R.id.nav_deals) {
-            fragment = DealsFragment.newInstance()
-        } else if (id == R.id.nav_history) {
-            fragment = HistoryFragment.newInstance()
-        } else if (id == R.id.nav_account) {
-            fragment = AccountFragment.newInstance()
-        } else if (id == R.id.nav_settings) {
-            fragment = SettingsFragment.newInstance()
+        when (id) {
+            R.id.nav_home -> fragment = HomeFragment.newInstance()
+            R.id.nav_payments -> fragment = PaymentsFragment.newInstance()
+            R.id.nav_deals -> fragment = DealsFragment.newInstance()
+            R.id.nav_history -> fragment = HistoryFragment.newInstance()
+            R.id.nav_account -> fragment = AccountFragment.newInstance()
+            R.id.nav_settings -> fragment = SettingsFragment.newInstance()
         }
         transaction.replace(R.id.container, fragment)
         transaction.commit()

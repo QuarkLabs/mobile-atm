@@ -7,7 +7,7 @@ class Account {
     var balance = BigDecimal(0.0)
     var transactions: List<Transaction> = LinkedList()
 
-    var isSpendingLimitApplied = true
+    var spendingLimitEnable = true
     var spendingLimit = BigDecimal(100.0)
 
     fun setSpendingLimit(spendingLimit: Double) {
