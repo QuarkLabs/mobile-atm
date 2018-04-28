@@ -1,6 +1,7 @@
 package com.ivantha.mobileatm.adapter
 
 import android.content.Context
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import com.ivantha.mobileatm.R
+import com.ivantha.mobileatm.common.Session
 import com.ivantha.mobileatm.model.Deal
 import com.squareup.picasso.Picasso
 
@@ -22,6 +24,7 @@ class DealRecyclerAdapter(private val deals: List<Deal>, private var context: Co
     }
 
     override fun onBindViewHolder(holder: DealViewHolder, position: Int) {
+        holder.cardViewBackground.setBackgroundColor(Session.dealColors[position % Session.dealColors.size])
         Picasso.with(context).load(deals[position].imageUrl).fit().centerCrop().into(holder.dealImageView)
         holder.dealTitleTextView.text = deals[position].title
         holder.dealDescriptionTextView.text = deals[position].description
@@ -34,6 +37,7 @@ class DealRecyclerAdapter(private val deals: List<Deal>, private var context: Co
 
     inner class DealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardView: CardView = itemView.findViewById(R.id.dealCardView)
+        val cardViewBackground: ConstraintLayout = itemView.findViewById(R.id.dealCardViewBackgroundLayout)
         val dealImageView: ImageView = itemView.findViewById(R.id.dealImageView)
         val dealTitleTextView: TextView = itemView.findViewById(R.id.dealTitleTextView)
         val dealDescriptionTextView: TextView = itemView.findViewById(R.id.dealDescriptionTextView)

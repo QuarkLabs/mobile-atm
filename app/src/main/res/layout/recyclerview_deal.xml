@@ -7,6 +7,7 @@
     android:layout_margin="4dp">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/dealCardViewBackgroundLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cardview_dark_background">

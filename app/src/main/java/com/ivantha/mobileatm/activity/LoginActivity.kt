@@ -6,16 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.common.Session
-import com.ivantha.mobileatm.model.Account
-import com.ivantha.mobileatm.model.User
+import com.ivantha.mobileatm.common.Test
 import kotlinx.android.synthetic.main.activity_login.*
-
-
-
-
 
 
 class LoginActivity : AppCompatActivity() {
@@ -30,21 +24,9 @@ class LoginActivity : AppCompatActivity() {
         if(firebaseAuth!!.currentUser!= null){
             Toast.makeText(this@LoginActivity, "Already logged in", Toast.LENGTH_SHORT).show()
 
-            ////////////////////////////////////////////////////////////////////////////////////////////
-            // Adding the user
-            val user = User()
-            user.firstName = "Oshan"
-            user.lastName = "Mudannayake"
-            user.email = "oshan.ivantha@gmail.com"
-            user.seed = "VKN9VNOZUFMWMMIUVZLVXUTFPWRGQQBNGEYWBHUYQMXNKPDDFAHVQJKCQRHUYHGRBLCIHDWHUGK99FHCI"
+            Test.addTestData()
 
-            val account = Account()
-            account.spendingLimit = 4570.0
-            user.account = account
-
-            FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth!!.currentUser!!.uid).setValue(user)
-            ////////////////////////////////////////////////////////////////////////////////////////////
-
+            // A value access is essential to start init() method in Session
             println(Session.currentUser)
 
             val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
