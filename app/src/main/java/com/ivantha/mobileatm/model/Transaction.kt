@@ -1,3 +1,7 @@
 package com.ivantha.mobileatm.model
 
-class Transaction
+import java.io.Serializable
+
+class Transaction : Serializable {
+
+}

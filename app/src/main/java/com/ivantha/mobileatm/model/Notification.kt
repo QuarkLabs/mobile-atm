@@ -1,3 +1,7 @@
 package com.ivantha.mobileatm.model
 
-class Notification
+import java.io.Serializable
+
+class Notification : Serializable {
+
+}

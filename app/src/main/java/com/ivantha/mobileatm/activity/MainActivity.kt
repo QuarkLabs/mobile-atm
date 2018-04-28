@@ -16,11 +16,7 @@ import android.widget.Toast
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ivantha.mobileatm.R
-import com.ivantha.mobileatm.common.Session
 import com.ivantha.mobileatm.fragment.*
-import com.ivantha.mobileatm.model.Account
-import com.ivantha.mobileatm.model.Settings
-import com.ivantha.mobileatm.model.User
 import com.squareup.picasso.Picasso
 import org.jetbrains.annotations.Contract
 
@@ -34,25 +30,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-
-        ////////////////////////////////////////////////////////////////////////////////////////////
-        // Emulating the login
-        val user = User()
-        user.firstName = "Oshan"
-        user.lastName = "Mudannayake"
-        user.email = "oshan.ivantha@gmail.com"
-        user.password = "oshan1234"
-        user.seed = "VKN9VNOZUFMWMMIUVZLVXUTFPWRGQQBNGEYWBHUYQMXNKPDDFAHVQJKCQRHUYHGRBLCIHDWHUGK99FHCI"
-
-        val account = Account()
-        account.setSpendingLimit(4570.0)
-        user.account = account
-
-        val settings = Settings()
-        user.settings = settings
-
-        Session.currentUser = user
-        ////////////////////////////////////////////////////////////////////////////////////////////
 
         setContentView(R.layout.activity_main)
 

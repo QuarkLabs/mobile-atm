@@ -1,6 +1,8 @@
 package com.ivantha.mobileatm.model
 
-class Deal {
+import java.io.Serializable
+
+class Deal : Serializable {
     var imageUrl: String? = null
     var title: String? = null
     var description: String? = null
