@@ -10,20 +10,24 @@
             android:title="@string/drawer_home" />
         <item
             android:id="@+id/nav_payments"
-            android:icon="@drawable/ic_payment_black_24dp"
-            android:title="@string/drawer_payments" />
+            android:icon="@drawable/ic_monetization_on_black_24dp"
+            android:title="Payments" />
+        <item
+            android:id="@+id/nav_utility_bills"
+            android:icon="@drawable/ic_local_atm_black_24dp"
+            android:title="Utility Bills" />
         <item
             android:id="@+id/nav_deals"
-            android:icon="@drawable/ic_local_atm_black_24dp"
+            android:icon="@drawable/ic_payment_black_24dp"
             android:title="@string/drawer_deals" />
-        <item
-            android:id="@+id/nav_history"
-            android:icon="@drawable/ic_history_black_24dp"
-            android:title="@string/drawer_history" />
     </group>
 
     <item android:title="@string/drawer_personal">
         <menu>
+            <item
+                android:id="@+id/nav_history"
+                android:icon="@drawable/ic_history_black_24dp"
+                android:title="@string/drawer_history" />
             <item
                 android:id="@+id/nav_account"
                 android:icon="@drawable/ic_account_balance_black_24dp"

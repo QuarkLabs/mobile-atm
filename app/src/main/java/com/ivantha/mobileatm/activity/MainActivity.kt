@@ -14,10 +14,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FirebaseUser
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.fragment.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.nav_header_main.*
 import org.jetbrains.annotations.Contract
 
 
@@ -110,6 +112,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (id) {
             R.id.nav_home -> fragment = HomeFragment.newInstance()
             R.id.nav_payments -> fragment = PaymentsFragment.newInstance()
+            R.id.nav_utility_bills -> fragment = BillsFragment.newInstance()
             R.id.nav_deals -> fragment = DealsFragment.newInstance()
             R.id.nav_history -> fragment = HistoryFragment.newInstance()
             R.id.nav_account -> fragment = AccountFragment.newInstance()
@@ -123,7 +126,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    // Get the results:
+    // Get the results
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
@@ -134,6 +137,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if (user != null) {
+            if(user.displayName != null){
+                navHeaderNameTextView.text = user.displayName
+            }
+
+            if(user.email != null){
+                navHeaderEmailTextView.text = user.email
+            }
+
+            if(user.photoUrl != null){
+                Picasso.with(this@MainActivity).load(user.photoUrl).fit().centerCrop().into(navHeaderProfileImageView)
+            }
         }
     }
 

@@ -7,17 +7,17 @@ import com.ivantha.mobileatm.model.Deal
 import com.ivantha.mobileatm.model.User
 
 object Test {
-    fun addTestData(){
+    fun addTestData() {
         clearData()
         addUser()
         addDeals()
     }
 
-    private fun clearData(){
+    private fun clearData() {
         FirebaseDatabase.getInstance().getReference("/").setValue(null)
     }
 
-    private fun addUser(){
+    private fun addUser() {
         val user = User()
         user.firstName = "Oshan"
         user.lastName = "Mudannayake"
@@ -25,20 +25,20 @@ object Test {
         user.seed = "VKN9VNOZUFMWMMIUVZLVXUTFPWRGQQBNGEYWBHUYQMXNKPDDFAHVQJKCQRHUYHGRBLCIHDWHUGK99FHCI"
 
         val account = Account()
-        account.spendingLimit = 4570.0
+        account.spendingLimit = 100.0
         user.account = account
 
         FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance()!!.currentUser!!.uid).setValue(user)
     }
 
-    private fun addDeals(){
+    private fun addDeals() {
         FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("Some Pizza",
                 "You will never get a discount like this!",
                 "CrazyHut",
                 "https://livekindlyproduction-8u6efaq1lwo6x9a.stackpathdns.com/wp-content/uploads/2017/08/pizza-vegan-1280x640.jpg"))
         FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("Party frocks",
-                "Odel",
                 "Clothes of your dreams",
+                "Odel",
                 "https://www.dhresource.com/0x0s/f2-albu-g5-M00-C1-99-rBVaJFhozYiATXqgAAH1iciKmqo369.jpg/2017-spring-kids-birthday-baby-party-wear.jpg"))
     }
 }

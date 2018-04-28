@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if(firebaseAuth!!.currentUser!= null){
+        if (firebaseAuth!!.currentUser != null) {
             Toast.makeText(this@LoginActivity, "Already logged in", Toast.LENGTH_SHORT).show()
 
             Test.addTestData()
@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
             val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
             this@LoginActivity.startActivity(myIntent)
-        }else{
+        } else {
             setContentView(R.layout.activity_login)
         }
     }

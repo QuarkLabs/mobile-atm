@@ -8,6 +8,6 @@ class Account : Serializable {
     var transactions: List<Transaction> = LinkedList()
 
     var spendingLimitEnable = true
-    var spendingLimit: Double = 100.0
+    var spendingLimit: Double = 0.0
 
 }
