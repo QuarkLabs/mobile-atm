@@ -25,7 +25,6 @@ import com.squareup.picasso.Picasso
 import org.jetbrains.annotations.Contract
 
 
-
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var mFirebaseAnalytics: FirebaseAnalytics? = null

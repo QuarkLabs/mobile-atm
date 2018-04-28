@@ -1,14 +1,19 @@
 package com.ivantha.mobileatm.fragment
 
+
 import android.os.Bundle
-import android.support.v7.preference.PreferenceFragmentCompat
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+
 import com.ivantha.mobileatm.R
 
-class AccountFragment : PreferenceFragmentCompat() {
+class AccountFragment : Fragment() {
 
-    override fun onCreatePreferences(bundle: Bundle, s: String) {
-        // Load the Preferences from the XML file
-        addPreferencesFromResource(R.xml.account)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_account, container, false)
     }
 
     companion object {
@@ -17,5 +22,4 @@ class AccountFragment : PreferenceFragmentCompat() {
             return AccountFragment()
         }
     }
-
 }

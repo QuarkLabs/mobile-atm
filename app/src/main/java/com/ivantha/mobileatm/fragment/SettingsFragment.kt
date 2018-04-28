@@ -7,7 +7,7 @@ import com.ivantha.mobileatm.R
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
-    override fun onCreatePreferences(bundle: Bundle, s: String) {
+    override fun onCreatePreferences(bundle: Bundle?, s: String?) {
         // Load the Preferences from the XML file
         addPreferencesFromResource(R.xml.settings)
     }
