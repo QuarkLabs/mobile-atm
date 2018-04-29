@@ -15,6 +15,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
@@ -69,9 +70,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                  var builder: AlertDialog.Builder = AlertDialog.Builder(this)
                         .setMessage(message)
                          .setView(imageView);
-                builder.create().show();
+                builder.create().show()
             } catch (e: WriterException) {
-                e.printStackTrace();
+                e.printStackTrace()
             }
         })
 
@@ -128,6 +129,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
+        if(id == R.id.nav_sign_out){
+            signOut()
+            return true
+        }
+
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
         var fragment: Fragment? = null
@@ -174,6 +180,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Picasso.with(this@MainActivity).load(user.photoUrl).fit().centerCrop().into(navHeaderProfileImageView)
             }
         }
+    }
+
+    private fun signOut(){
+        FirebaseAuth.getInstance().signOut();
+        val myIntent = Intent(this@MainActivity, LoginActivity::class.java)
+        this@MainActivity.startActivity(myIntent)
     }
 
     companion object {

@@ -22,15 +22,14 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         if (firebaseAuth!!.currentUser != null) {
-            Toast.makeText(this@LoginActivity, "Already logged in", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Already logged in", Toast.LENGTH_SHORT).show()
 
             Test.addTestData()
 
             // A value access is essential to start init() method in Session
             println(Session.currentUser)
 
-            val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
-            this@LoginActivity.startActivity(myIntent)
+            showMainActivity()
         } else {
             setContentView(R.layout.activity_login)
         }
@@ -64,7 +63,9 @@ class LoginActivity : AppCompatActivity() {
     private fun performLogin(email: String, password: String) {
         firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                Toast.makeText(this@LoginActivity, "Login success", Toast.LENGTH_SHORT).show()
+                val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                this@LoginActivity.startActivity(myIntent)
+                Toast.makeText(applicationContext, "Login success", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this@LoginActivity, "Authentication failed", Toast.LENGTH_SHORT).show()
             }
@@ -80,6 +81,11 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "Account registration failed", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showMainActivity(){
+        val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
+        this@LoginActivity.startActivity(myIntent)
     }
 
 }
