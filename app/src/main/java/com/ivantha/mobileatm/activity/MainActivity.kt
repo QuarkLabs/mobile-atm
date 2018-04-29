@@ -1,24 +1,32 @@
 package com.ivantha.mobileatm.activity
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.Toast
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseUser
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
+import com.google.zxing.common.BitMatrix
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.fragment.*
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 import org.jetbrains.annotations.Contract
 
@@ -38,8 +46,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener {
+        transactionFab.setOnClickListener {
             val intentIntegrator = IntentIntegrator(this@MainActivity)
             intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
             intentIntegrator.setPrompt("Scan your transaction QR code")
@@ -48,12 +55,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intentIntegrator.initiateScan()
         }
 
-        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        fakeFab.setOnClickListener({
+            var message = "Oshan Mudannayake"
+            var multiFormatWriter = MultiFormatWriter()
+            try {
+                var bitMatrix: BitMatrix = multiFormatWriter.encode(message, BarcodeFormat.QR_CODE,1000,1000)
+                var barcodeEncoder = BarcodeEncoder()
+                var bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
+
+                var imageView = ImageView(baseContext)
+                imageView.setImageBitmap(bitmap)
+
+                 var builder: AlertDialog.Builder = AlertDialog.Builder(this)
+                        .setMessage(message)
+                         .setView(imageView);
+                builder.create().show();
+            } catch (e: WriterException) {
+                e.printStackTrace();
+            }
+        })
+
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
         mainActivity = this@MainActivity
@@ -70,7 +95,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
-        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
@@ -89,7 +113,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
-
 
         if (id == R.id.action_help) {
             return true
@@ -121,7 +144,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         transaction.replace(R.id.container, fragment)
         transaction.commit()
 
-        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
@@ -142,14 +164,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            if(user.displayName != null){
+            if(user.displayName != null) {
                 navHeaderNameTextView.text = user.displayName
             }
-
             if(user.email != null){
                 navHeaderEmailTextView.text = user.email
             }
-
             if(user.photoUrl != null){
                 Picasso.with(this@MainActivity).load(user.photoUrl).fit().centerCrop().into(navHeaderProfileImageView)
             }
