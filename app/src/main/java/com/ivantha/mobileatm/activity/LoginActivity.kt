@@ -83,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun showMainActivity(){
+    private fun showMainActivity() {
         val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
         this@LoginActivity.startActivity(myIntent)
     }

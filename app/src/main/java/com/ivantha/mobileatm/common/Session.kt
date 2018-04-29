@@ -4,13 +4,19 @@ import android.graphics.Color
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.google.gson.*
 import com.ivantha.mobileatm.model.Deal
 import com.ivantha.mobileatm.model.User
+import org.joda.time.DateTime
+import org.joda.time.format.ISODateTimeFormat
 
 
 object Session {
     var firebaseUser: FirebaseUser? = null
     var currentUser: User? = null
+
+    var gson: Gson
+
     var deals: HashMap<String, Deal> = HashMap()
     val dealColors: ArrayList<Int> = ArrayList()
 
@@ -27,10 +33,19 @@ object Session {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                println("--------------------------------------------------------------------------")
+                TODO("Failed to read value")
             }
         })
+
+        // Initialize Gson
+        gson = GsonBuilder()
+                .registerTypeAdapter(DateTime::class.java, JsonSerializer<DateTime> { json, _, _ ->
+                    JsonPrimitive(ISODateTimeFormat.dateTime().print(json))
+                })
+                .registerTypeAdapter(DateTime::class.java, JsonDeserializer { json, _, _ ->
+                    ISODateTimeFormat.dateTime().parseDateTime(json.asString)
+                })
+                .create()
 
         // Initialize deals
         db.child("deals").addChildEventListener(object : ChildEventListener {
@@ -51,7 +66,7 @@ object Session {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Failed to read value
+                TODO("Failed to read value")
             }
         })
 

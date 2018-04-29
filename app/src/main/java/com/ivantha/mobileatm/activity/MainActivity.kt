@@ -24,6 +24,8 @@ import com.google.zxing.common.BitMatrix
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.fragment.*
+import com.ivantha.mobileatm.model.Transaction
+import com.ivantha.mobileatm.service.TransactionServices
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -54,22 +56,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intentIntegrator.setBeepEnabled(true)
             intentIntegrator.setBarcodeImageEnabled(true)
             intentIntegrator.initiateScan()
+
         }
 
         fakeFab.setOnClickListener({
-            var message = "Oshan Mudannayake"
+            var transaction = Transaction(Transaction.Intention.REQUEST, 1.0)
+            transaction.title = "Test"
+            transaction.description = "A random transaction"
+
+            var message = TransactionServices.transactionToJson(transaction)
             var multiFormatWriter = MultiFormatWriter()
             try {
-                var bitMatrix: BitMatrix = multiFormatWriter.encode(message, BarcodeFormat.QR_CODE,1000,1000)
+                var bitMatrix: BitMatrix = multiFormatWriter.encode(message, BarcodeFormat.QR_CODE, 1000, 1000)
                 var barcodeEncoder = BarcodeEncoder()
                 var bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
 
                 var imageView = ImageView(baseContext)
                 imageView.setImageBitmap(bitmap)
 
-                 var builder: AlertDialog.Builder = AlertDialog.Builder(this)
+                var builder: AlertDialog.Builder = AlertDialog.Builder(this)
                         .setMessage(message)
-                         .setView(imageView);
+                        .setView(imageView);
                 builder.create().show()
             } catch (e: WriterException) {
                 e.printStackTrace()
@@ -129,7 +136,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
-        if(id == R.id.nav_sign_out){
+        if (id == R.id.nav_sign_out) {
             signOut()
             return true
         }
@@ -155,13 +162,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     // Get the results
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+
+                var transaction: Transaction = TransactionServices.transactionFromJson(result.contents)
+                when (transaction.intention) {
+                    Transaction.Intention.SEND -> {
+                        // Receive cash sent by the other party
+                        receiveCash(transaction)
+                    }
+                    Transaction.Intention.REQUEST -> {
+                        // Send cash requested by the other party
+                        sendCash(transaction)
+                    }
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
@@ -170,22 +189,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            if(user.displayName != null) {
+            if (user.displayName != null) {
                 navHeaderNameTextView.text = user.displayName
             }
-            if(user.email != null){
+            if (user.email != null) {
                 navHeaderEmailTextView.text = user.email
             }
-            if(user.photoUrl != null){
+            if (user.photoUrl != null) {
                 Picasso.with(this@MainActivity).load(user.photoUrl).fit().centerCrop().into(navHeaderProfileImageView)
             }
         }
     }
 
-    private fun signOut(){
+    private fun signOut() {
         FirebaseAuth.getInstance().signOut();
         val myIntent = Intent(this@MainActivity, LoginActivity::class.java)
         this@MainActivity.startActivity(myIntent)
+    }
+
+    private fun receiveCash(transaction: Transaction){
+
+    }
+
+    private fun sendCash(transaction: Transaction){
+
     }
 
     companion object {

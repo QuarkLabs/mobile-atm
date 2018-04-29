@@ -7,16 +7,19 @@ import com.ivantha.mobileatm.model.Deal
 import com.ivantha.mobileatm.model.User
 
 object Test {
+    @JvmStatic
     fun addTestData() {
         clearData()
         addUser()
         addDeals()
     }
 
+    @JvmStatic
     private fun clearData() {
         FirebaseDatabase.getInstance().getReference("/").setValue(null)
     }
 
+    @JvmStatic
     private fun addUser() {
         val user = User()
         user.firstName = "Oshan"
@@ -31,6 +34,7 @@ object Test {
         FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance()!!.currentUser!!.uid).setValue(user)
     }
 
+    @JvmStatic
     private fun addDeals() {
         FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("Some Pizza",
                 "You will never get a discount like this!",
