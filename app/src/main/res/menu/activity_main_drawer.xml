@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/drawer_home" />
         <item
-            android:id="@+id/nav_payments"
-            android:icon="@drawable/ic_monetization_on_black_24dp"
-            android:title="Payments" />
-        <item
             android:id="@+id/nav_utility_bills"
             android:icon="@drawable/ic_local_atm_black_24dp"
             android:title="Utility Bills" />
