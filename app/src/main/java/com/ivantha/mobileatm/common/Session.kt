@@ -2,32 +2,38 @@ package com.ivantha.mobileatm.common
 
 import android.graphics.Color
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.gson.*
 import com.ivantha.mobileatm.model.Deal
 import com.ivantha.mobileatm.model.User
 import org.joda.time.DateTime
 import org.joda.time.format.ISODateTimeFormat
 
-
+/**
+ * Contains the global variable of the current session of the app
+ */
 object Session {
-    var firebaseUser: FirebaseUser? = null
+
+    // User
     var currentUser: User? = null
 
+    // JSON parser
     var gson: Gson
 
+    // Deals
     var deals: HashMap<String, Deal> = HashMap()
     val dealColors: ArrayList<Int> = ArrayList()
 
-    private var db = FirebaseDatabase.getInstance().reference
-
+    /**
+     * Initialize the session variable and functions
+     */
     init {
-        // Initialize firebaseUser
-        firebaseUser = FirebaseAuth.getInstance().currentUser
 
         // Initialize currentUser
-        db.child("users").child(firebaseUser!!.uid).addValueEventListener(object : ValueEventListener {
+        FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 currentUser = dataSnapshot.getValue(User::class.java)
             }

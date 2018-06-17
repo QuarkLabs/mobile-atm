@@ -46,10 +46,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setContentView(R.layout.activity_main)
 
+        // Set toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        transactionFab.setOnClickListener {
+        // Start new transaction
+        startTransactionFab.setOnClickListener {
+            val transaction = Transaction(Transaction.Intention.SEND, 1.0)
+            transaction.title = "Test"
+            transaction.description = "A random transaction"
+
+            val message = TransactionServices.transactionToJson(transaction)
+            val multiFormatWriter = MultiFormatWriter()
+            try {
+                val bitMatrix: BitMatrix = multiFormatWriter.encode(message, BarcodeFormat.QR_CODE, 1000, 1000)
+                val barcodeEncoder = BarcodeEncoder()
+                val bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
+
+                val imageView = ImageView(baseContext)
+                imageView.setImageBitmap(bitmap)
+
+                val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+                        .setMessage(message)
+                        .setView(imageView)
+                builder.create().show()
+            } catch (e: WriterException) {
+                e.printStackTrace()
+            }
+        }
+
+        // Process incoming transaction
+        processTransactionFab.setOnClickListener {
             val intentIntegrator = IntentIntegrator(this@MainActivity)
             intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
             intentIntegrator.setPrompt("Scan your transaction QR code")
@@ -58,30 +85,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intentIntegrator.initiateScan()
 
         }
-
-        fakeFab.setOnClickListener({
-            var transaction = Transaction(Transaction.Intention.REQUEST, 1.0)
-            transaction.title = "Test"
-            transaction.description = "A random transaction"
-
-            var message = TransactionServices.transactionToJson(transaction)
-            var multiFormatWriter = MultiFormatWriter()
-            try {
-                var bitMatrix: BitMatrix = multiFormatWriter.encode(message, BarcodeFormat.QR_CODE, 1000, 1000)
-                var barcodeEncoder = BarcodeEncoder()
-                var bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
-
-                var imageView = ImageView(baseContext)
-                imageView.setImageBitmap(bitmap)
-
-                var builder: AlertDialog.Builder = AlertDialog.Builder(this)
-                        .setMessage(message)
-                        .setView(imageView);
-                builder.create().show()
-            } catch (e: WriterException) {
-                e.printStackTrace()
-            }
-        })
 
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
@@ -160,7 +163,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    // Get the results
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
@@ -186,6 +188,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             if (user.displayName != null) {
@@ -200,6 +203,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    /**
+     * Sign out
+     */
     private fun signOut() {
         FirebaseAuth.getInstance().signOut();
         val myIntent = Intent(this@MainActivity, LoginActivity::class.java)

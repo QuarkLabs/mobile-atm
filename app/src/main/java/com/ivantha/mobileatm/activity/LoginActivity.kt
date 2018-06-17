@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        // Navigate to MainActivity if the user is already logged in
         if (firebaseAuth!!.currentUser != null) {
             Toast.makeText(applicationContext, "Already logged in", Toast.LENGTH_SHORT).show()
 
@@ -36,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onClickLoginActivitySignInButton(view: View) {
-        var email = loginActivityEmailEditText.text.toString()
-        var password = loginActivityPasswordEditText.text.toString()
+        val email = loginActivityEmailEditText.text.toString()
+        val password = loginActivityPasswordEditText.text.toString()
 
         if (email != null && password != null) {
             performLoginOrAccountCreation(email, password)
@@ -60,6 +61,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Login and navigate to MainActivity
+     */
     private fun performLogin(email: String, password: String) {
         firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
@@ -72,6 +76,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Create a new login account in Firebase
+     */
     private fun registerAccount(email: String, password: String) {
         firebaseAuth!!.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
@@ -83,6 +90,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Navigate to MainActivity
+     */
     private fun showMainActivity() {
         val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
         this@LoginActivity.startActivity(myIntent)

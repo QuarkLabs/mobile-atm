@@ -1,17 +1,15 @@
 package com.ivantha.mobileatm.model
 
-import com.google.gson.JsonParser
 import com.ivantha.mobileatm.common.Session
 import org.joda.time.DateTime
 import java.io.Serializable
 
-class Transaction(var intention: Intention,
-                  var amount: Double) : Serializable {
+class Transaction(var intention: Intention, var amount: Double) : Serializable {
     var timestamp: DateTime = DateTime()
     var title: String? = null
     var description: String? = null
 
-    enum class Intention{
+    enum class Intention {
         SEND,
         REQUEST
     }
