@@ -10,7 +10,7 @@ object Test {
     @JvmStatic
     fun addTestData() {
         clearData()
-        addUser()
+        addUsers()
         addDeals()
     }
 
@@ -20,18 +20,31 @@ object Test {
     }
 
     @JvmStatic
-    private fun addUser() {
-        val user = User()
-        user.firstName = "Oshan"
-        user.lastName = "Mudannayake"
-        user.email = "oshan.ivantha@gmail.com"
-        user.seed = "VKN9VNOZUFMWMMIUVZLVXUTFPWRGQQBNGEYWBHUYQMXNKPDDFAHVQJKCQRHUYHGRBLCIHDWHUGK99FHCI"
+    private fun addUsers() {
+        val user1 = User()
+        user1.firstName = "Oshan"
+        user1.lastName = "Mudannayake"
+        user1.email = "oshan.ivantha@gmail.com"
+        user1.seed = "VKN9VNOZUFMWMMIUVZLVXUTFPWRGQQBNGEYWBHUYQMXNKPDDFAHVQJKCQRHUYHGRBLCIHDWHUGK99FHCI"
 
-        val account = Account()
-        account.spendingLimit = 100.0
-        user.account = account
+        val account1 = Account()
+        account1.balance = 200.0
+        account1.spendingLimit = 100.0
+        user1.account = account1
 
-        FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance()!!.currentUser!!.uid).setValue(user)
+        val user2 = User()
+        user2.firstName = "Upeksha"
+        user2.lastName = "Liyanage"
+        user2.email = "upeksha.4nnet@gmail.com"
+        user2.seed = "HSYYCLWNXHKTILDNRIBYJZVE9JGMSADOTXEEGSCLNEQLIHQHVNQWOOWKKERQKQT9MO9QRFAIWLSKHZKQT"
+
+        val account2 = Account()
+        account1.balance = 250.0
+        account2.spendingLimit = 50.0
+        user2.account = account2
+
+        FirebaseDatabase.getInstance().getReference("users").child("qsp8g1byz5hs84xzDywfCtmc2P72").setValue(user1)
+        FirebaseDatabase.getInstance().getReference("users").child("MThDUb24tsgDIiOqy3rPvYITj9l2").setValue(user2)
     }
 
     @JvmStatic

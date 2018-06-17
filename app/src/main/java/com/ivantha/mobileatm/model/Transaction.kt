@@ -8,6 +8,8 @@ class Transaction(var intention: Intention, var amount: Double) : Serializable {
     var timestamp: DateTime = DateTime()
     var title: String? = null
     var description: String? = null
+    var initiatorId: String? = null
+    var receiverId: String? = null
 
     enum class Intention {
         SEND,

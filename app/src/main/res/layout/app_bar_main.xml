@@ -36,6 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_camera_alt_white_45dp" />
+        app:srcCompat="@drawable/ic_local_atm_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
