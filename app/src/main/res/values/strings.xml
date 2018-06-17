@@ -24,4 +24,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lbl_acc_balance">Account Balance</string>
+    <string name="lbl_acc_unverfiedBalance">Unverfied Balance</string>
+    <string name="lbl_acc_spendingLimit">Spending Limit</string>
+    <string name="lbl_acc_spendingLimitEnable">Enable Spending Limit</string>
+    <string name="lbl_user_firstName">First Name</string>
+    <string name="lbl_user_lastName">Last Name</string>
+    <string name="lbl_user_email">Email</string>
+    <string name="lbl_header_general">General</string>
+    <string name="lbl_header_wallet">Wallet</string>
+    <string name="lbl_header_accSettings">Wallet Preferences</string>
+    <string name="lbl_acc_seed">IOTA Seed</string>
+    <string name="btn_acc_save">Save</string>
 </resources>

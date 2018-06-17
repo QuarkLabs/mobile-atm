@@ -71,6 +71,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val transaction = Transaction(Transaction.Intention.SEND, 1.0)
             transaction.title = "Test"
             transaction.description = "A random transaction"
+            transaction.initiatorId = "MThDUb24tsgDIiOqy3rPvYITj9l2"
+            transaction.initiatorName = "Upeksha Liyanage"
 
             val message = TransactionServices.transactionToJson(transaction)
             val multiFormatWriter = MultiFormatWriter()
@@ -249,11 +251,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         params.put("title", transaction.title)
         params.put("description", transaction.description)
         params.put("amount", transaction.amount)
-        params.put("initiator_id", transaction.initiatorId)
-        params.put("receiver_id", transaction.receiverId)
+        params.put("initiatorId", transaction.initiatorId)
+        params.put("receiverId", transaction.receiverId)
         params.put("created", transaction.intention)
 
-        val jsonObjReq = object : JsonObjectRequest(Method.POST, "<url>", params,
+        val jsonObjReq = object : JsonObjectRequest(Method.POST, "https://us-central1-mobile-atm-10742.cloudfunctions.net/route/transactions", params,
                 Response.Listener<JSONObject> { response ->
                     Log.d(TAG, "/post request OK! Response: $response")
                     Toast.makeText(this, "/post request OK! Response: $response", Toast.LENGTH_LONG).show()
