@@ -106,10 +106,10 @@ class LoginActivity : AppCompatActivity() {
         val handler = Handler()
         val runnableCode = object : Runnable {
             override fun run() {
-                if(Session.currentUser == null){
+                if (Session.currentUser == null) {
                     println("Waiting for currentUser to be updated....")
                     handler.postDelayed(this, 200)
-                }else{
+                } else {
                     val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
                     this@LoginActivity.startActivity(myIntent)
                 }

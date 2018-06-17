@@ -12,7 +12,7 @@ import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.adapter.DealRecyclerAdapter
 import com.ivantha.mobileatm.common.Session
 
-class DealsFragment() : Fragment() {
+class DealsFragment : Fragment() {
 
     private var recyclerView: RecyclerView? = null
     private var gridLayoutManager: GridLayoutManager? = null

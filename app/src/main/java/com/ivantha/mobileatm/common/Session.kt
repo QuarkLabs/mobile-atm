@@ -2,12 +2,10 @@ package com.ivantha.mobileatm.common
 
 import android.graphics.Color
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import com.google.gson.*
+import com.google.firebase.database.FirebaseDatabase
+import com.google.gson.Gson
 import com.ivantha.mobileatm.model.Deal
 import com.ivantha.mobileatm.model.User
-import org.joda.time.DateTime
-import org.joda.time.format.ISODateTimeFormat
 
 /**
  * Contains the global variable of the current session of the app
@@ -38,7 +36,8 @@ object Session {
         dealColors.add(Color.parseColor("#F4511E"))
         dealColors.add(Color.parseColor("#3949AB"))
     }
-    fun updateUser():Unit{
+
+    fun updateUser(): Unit {
         FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(currentUser)
     }
 }

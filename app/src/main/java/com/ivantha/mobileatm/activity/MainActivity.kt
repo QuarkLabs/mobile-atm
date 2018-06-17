@@ -19,12 +19,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.gson.JsonParser
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -39,7 +37,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
-import org.bouncycastle.asn1.ua.DSTU4145NamedCurves.params
 import org.json.JSONObject
 
 
@@ -237,7 +234,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * Sign out
      */
     private fun signOut() {
-        FirebaseAuth.getInstance().signOut();
+        FirebaseAuth.getInstance().signOut()
         val myIntent = Intent(this@MainActivity, LoginActivity::class.java)
         this@MainActivity.startActivity(myIntent)
     }

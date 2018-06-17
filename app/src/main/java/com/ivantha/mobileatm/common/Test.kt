@@ -1,6 +1,5 @@
 package com.ivantha.mobileatm.common
 
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.ivantha.mobileatm.model.Account
 import com.ivantha.mobileatm.model.Deal

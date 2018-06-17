@@ -21,7 +21,7 @@ class Transaction(var intention: Intention, var amount: Double) : Serializable {
         REQUEST
     }
 
-    public fun getStatement(): String {
+    fun getStatement(): String {
         return title +
                 "\n" + description +
                 "\n" + "Amount : " + amount +
