@@ -2,14 +2,24 @@ package com.ivantha.mobileatm.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonPrimitive
+import com.google.gson.JsonSerializer
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.common.Session
 import com.ivantha.mobileatm.common.Test
+import com.ivantha.mobileatm.model.Deal
+import com.ivantha.mobileatm.model.User
 import kotlinx.android.synthetic.main.activity_login.*
+import org.joda.time.DateTime
+import org.joda.time.format.ISODateTimeFormat
 
 
 class LoginActivity : AppCompatActivity() {
@@ -21,14 +31,11 @@ class LoginActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        initGson()
+
         // Navigate to MainActivity if the user is already logged in
         if (firebaseAuth!!.currentUser != null) {
             Toast.makeText(applicationContext, "Already logged in", Toast.LENGTH_SHORT).show()
-
-            Test.addTestData()
-
-            // A value access is essential to start init() method in Session
-            println(Session.currentUser)
 
             showMainActivity()
         } else {
@@ -37,8 +44,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onClickLoginActivitySignInButton(view: View) {
-        val email = loginActivityEmailEditText.text.toString()
-        val password = loginActivityPasswordEditText.text.toString()
+        var email = loginActivityEmailEditText.text.toString()
+        var password = loginActivityPasswordEditText.text.toString()
 
         if (email != null && password != null) {
             performLoginOrAccountCreation(email, password)
@@ -67,9 +74,7 @@ class LoginActivity : AppCompatActivity() {
     private fun performLogin(email: String, password: String) {
         firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
-                this@LoginActivity.startActivity(myIntent)
-                Toast.makeText(applicationContext, "Login success", Toast.LENGTH_SHORT).show()
+                showMainActivity()
             } else {
                 Toast.makeText(this@LoginActivity, "Authentication failed", Toast.LENGTH_SHORT).show()
             }
@@ -94,8 +99,79 @@ class LoginActivity : AppCompatActivity() {
      * Navigate to MainActivity
      */
     private fun showMainActivity() {
-        val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
-        this@LoginActivity.startActivity(myIntent)
+        Test.addTestData()
+        initCurrentUser()
+        initDeals()
+
+        val handler = Handler()
+        val runnableCode = object : Runnable {
+            override fun run() {
+                if(Session.currentUser == null){
+                    println("Waiting for currentUser to be updated....")
+                    handler.postDelayed(this, 200)
+                }else{
+                    val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                    this@LoginActivity.startActivity(myIntent)
+                }
+            }
+        }
+        handler.post(runnableCode)
     }
 
+    /**
+     * Initialize current user
+     */
+    private fun initCurrentUser() {
+        FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                Session.currentUser = dataSnapshot.getValue(User::class.java)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Failed to read value")
+            }
+        })
+    }
+
+    /**
+     * Initialize Gson
+     */
+    private fun initGson() {
+        Session.gson = GsonBuilder()
+                .registerTypeAdapter(DateTime::class.java, JsonSerializer<DateTime> { json, _, _ ->
+                    JsonPrimitive(ISODateTimeFormat.dateTime().print(json))
+                })
+                .registerTypeAdapter(DateTime::class.java, JsonDeserializer { json, _, _ ->
+                    ISODateTimeFormat.dateTime().parseDateTime(json.asString)
+                })
+                .create()
+    }
+
+    /**
+     * Initialize deals
+     */
+    private fun initDeals() {
+        FirebaseDatabase.getInstance().reference.child("deals").addChildEventListener(object : ChildEventListener {
+            override fun onCancelled(databaseError: DatabaseError) {
+                TODO("Failed to read value")
+            }
+
+            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Session.deals[dataSnapshot.key!!] = dataSnapshot.getValue<Deal>(Deal::class.java)!!
+            }
+
+            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Session.deals[dataSnapshot.key!!] = dataSnapshot.getValue<Deal>(Deal::class.java)!!
+            }
+
+            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Session.deals[dataSnapshot.key!!] = dataSnapshot.getValue<Deal>(Deal::class.java)!!
+            }
+
+            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                Session.deals.remove(dataSnapshot.key)
+            }
+
+        })
+    }
 }

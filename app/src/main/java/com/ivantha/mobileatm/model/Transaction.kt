@@ -17,7 +17,7 @@ class Transaction(var intention: Intention, var amount: Double) : Serializable {
     }
 
     override fun toString(): String {
-        return Session.gson.toJson(this)
+        return Session.gson!!.toJson(this)
     }
 
 }
