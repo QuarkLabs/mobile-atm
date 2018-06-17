@@ -86,4 +86,7 @@ object Session {
         dealColors.add(Color.parseColor("#F4511E"))
         dealColors.add(Color.parseColor("#3949AB"))
     }
+    fun updateUser():Unit{
+        FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(currentUser)
+    }
 }
