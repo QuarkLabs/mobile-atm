@@ -16,6 +16,7 @@ import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.common.Session
 import com.ivantha.mobileatm.common.Test
 import com.ivantha.mobileatm.model.Deal
+import com.ivantha.mobileatm.model.Transaction
 import com.ivantha.mobileatm.model.User
 import kotlinx.android.synthetic.main.activity_login.*
 import org.joda.time.DateTime
@@ -102,6 +103,7 @@ class LoginActivity : AppCompatActivity() {
         Test.addTestData()
         initCurrentUser()
         initDeals()
+        initTransactions()
 
         val handler = Handler()
         val runnableCode = object : Runnable {
@@ -170,6 +172,34 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onChildRemoved(dataSnapshot: DataSnapshot) {
                 Session.deals.remove(dataSnapshot.key)
+            }
+
+        })
+    }
+
+    /**
+     * Initialize transactions
+     */
+    private fun initTransactions() {
+        FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("log").addChildEventListener(object : ChildEventListener {
+            override fun onCancelled(databaseError: DatabaseError) {
+                TODO("Failed to read value")
+            }
+
+            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Session.transactions[dataSnapshot.key!!] = dataSnapshot.getValue<Transaction>(Transaction::class.java)!!
+            }
+
+            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Session.transactions[dataSnapshot.key!!] = dataSnapshot.getValue<Transaction>(Transaction::class.java)!!
+            }
+
+            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Session.transactions[dataSnapshot.key!!] = dataSnapshot.getValue<Transaction>(Transaction::class.java)!!
+            }
+
+            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                Session.transactions.remove(dataSnapshot.key)
             }
 
         })

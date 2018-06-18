@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 import com.ivantha.mobileatm.model.Deal
+import com.ivantha.mobileatm.model.Transaction
 import com.ivantha.mobileatm.model.User
 
 /**
@@ -21,6 +22,9 @@ object Session {
     // Deals
     var deals: HashMap<String, Deal> = HashMap()
     val dealColors: ArrayList<Int> = ArrayList()
+
+    // Transactions
+    var transactions: HashMap<String, Transaction> = HashMap()
 
     /**
      * Initialize the session variable and functions

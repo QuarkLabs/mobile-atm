@@ -4,8 +4,10 @@ import com.ivantha.mobileatm.common.Session
 import org.joda.time.DateTime
 import java.io.Serializable
 
-class Transaction(var intention: Intention, var amount: Double) : Serializable {
-    var timestamp: DateTime = DateTime()
+class Transaction : Serializable {
+    var intention: Intention? = null
+    var amount: Double? = null
+    var timestamp: Long = DateTime().toDateTime().getMillis();
     var confirmed: Boolean = false
     var title: String? = null
     var description: String? = null
@@ -19,6 +21,13 @@ class Transaction(var intention: Intention, var amount: Double) : Serializable {
     enum class Intention {
         SEND,
         REQUEST
+    }
+
+    constructor()
+
+    constructor(intention: Intention, amount: Double) {
+        this.intention = intention
+        this.amount = amount
     }
 
     fun getStatement(): String {
