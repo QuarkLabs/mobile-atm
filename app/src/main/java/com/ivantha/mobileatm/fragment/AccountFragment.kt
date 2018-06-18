@@ -20,8 +20,6 @@ class AccountFragment : Fragment() {
     var swt_acc_spendingLimitEnable: Switch? = null
     var txt_user_firstName: TextView? = null
     var txt_user_lastName: TextView? = null
-    var txt_user_email: TextView? = null
-    var txt_acc_seed: TextView? = null
     var btn_save: Button? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,8 +32,6 @@ class AccountFragment : Fragment() {
         swt_acc_spendingLimitEnable = view.findViewById(R.id.swt_acc_spendingLimitEnable)
         txt_user_firstName = view.findViewById(R.id.txt_user_firstName)
         txt_user_lastName = view.findViewById(R.id.txt_user_lastName)
-        txt_user_email = view.findViewById(R.id.txt_user_email)
-        txt_acc_seed = view.findViewById(R.id.txt_acc_seed)
 
         if (Session.currentUser != null) {
             txt_acc_balance!!.text = Session.currentUser!!.account!!.balance.toString()
@@ -44,8 +40,6 @@ class AccountFragment : Fragment() {
             swt_acc_spendingLimitEnable!!.isChecked = Session.currentUser!!.account!!.spendingLimitEnable
             txt_user_firstName!!.text = Session.currentUser!!.firstName
             txt_user_lastName!!.text = Session.currentUser!!.lastName
-            txt_user_email!!.text = Session.currentUser!!.email
-            txt_acc_seed!!.text = Session.currentUser!!.seed
         }
 
         val btn_save = view.findViewById(R.id.btn_save) as Button
@@ -57,8 +51,6 @@ class AccountFragment : Fragment() {
                 Session.currentUser!!.account!!.spendingLimitEnable = swt_acc_spendingLimitEnable!!.isChecked
                 Session.currentUser!!.firstName = txt_user_firstName!!.text.toString()
                 Session.currentUser!!.lastName = txt_user_lastName!!.text.toString()
-                Session.currentUser!!.email = txt_user_email!!.text.toString()
-                Session.currentUser!!.seed = txt_acc_seed!!.text.toString()
                 Session.updateUser()
                 Toast.makeText(activity, "Updated", Toast.LENGTH_LONG).show()
 

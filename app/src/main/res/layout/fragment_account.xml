@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginEnd="5dp"
-    android:layout_marginStart="5dp"
+    android:layout_margin="16dp"
     android:orientation="vertical"
     tools:context=".fragment.AccountFragment">
 
@@ -22,12 +21,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:orientation="vertical"
+        android:gravity="center_vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:orientation="horizontal">
 
             <TextView
@@ -43,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Name"
@@ -52,7 +53,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
@@ -66,28 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/lbl_user_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lbl_user_email" />
-
-            <EditText
-                android:id="@+id/txt_user_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginStart="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Name"
@@ -118,8 +99,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:id="@+id/lbl_acc_balance"
@@ -127,11 +110,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lbl_acc_balance" />
 
-            <EditText
+            <TextView
                 android:id="@+id/txt_acc_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="16dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
@@ -140,7 +124,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
@@ -149,35 +134,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lbl_acc_unverfiedBalance" />
 
-            <EditText
+            <TextView
                 android:id="@+id/txt_acc_unverfiedBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="16dp"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/lbl_acc_seed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lbl_acc_seed" />
-
-            <EditText
-                android:id="@+id/txt_acc_seed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPassword"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
 
         </LinearLayout>
@@ -206,7 +170,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
@@ -220,6 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Name"
@@ -229,7 +195,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
@@ -243,6 +210,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="16dp"
                 android:checked="true"
                 android:textAlignment="viewEnd"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
