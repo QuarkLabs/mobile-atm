@@ -41,12 +41,36 @@ object Test {
         user2.seed = "HSYYCLWNXHKTILDNRIBYJZVE9JGMSADOTXEEGSCLNEQLIHQHVNQWOOWKKERQKQT9MO9QRFAIWLSKHZKQT"
 
         val account2 = Account()
-        account1.balance = 250.0
+        account2.balance = 250.0
         account2.spendingLimit = 50.0
         user2.account = account2
 
+        val user3 = User()
+        user3.firstName = "Sumedhe"
+        user3.lastName = "Dissanayake"
+        user3.email = "sumedhedissanayake@gmail.com"
+        user3.seed = "PGTEIFEODLSIWTXOA9GHBOXFMCTTY9KDHFWTFTCEGCKDPDMFGLZZHNGVEWWNFTSBAQAKUMGSYYUYVYQNH"
+
+        val account3 = Account()
+        account3.balance = 320.0
+        account3.spendingLimit = 20.0
+        user3.account = account3
+
+        val user4 = User()
+        user4.firstName = "Pramodya"
+        user4.lastName = "Abeysinghe"
+        user4.email = "pramodyaabeysinghe@gmail.com"
+        user4.seed = "YZHHXHUUUU99DRTETOOLJAAG9VIRZSNRUV999F9KXKVJZAVMGHCTGHMGMIMAOTVJFAUR9HGJQFMZ9SBYH"
+
+        val account4 = Account()
+        account4.balance = 120.0
+        account4.spendingLimit = 40.0
+        user4.account = account4
+
         FirebaseDatabase.getInstance().getReference("users").child("qsp8g1byz5hs84xzDywfCtmc2P72").setValue(user1)
         FirebaseDatabase.getInstance().getReference("users").child("MThDUb24tsgDIiOqy3rPvYITj9l2").setValue(user2)
+        FirebaseDatabase.getInstance().getReference("users").child("MThDUb24tsgDIiOqy3rPvYITj9l2").setValue(user3)
+        FirebaseDatabase.getInstance().getReference("users").child("MThDUb24tsgDIiOqy3rPvYITj9l2").setValue(user4)
     }
 
     @JvmStatic
