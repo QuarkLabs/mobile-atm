@@ -55,10 +55,51 @@ object Test {
                 "You will never get a discount like this!",
                 "CrazyHut",
                 "https://livekindlyproduction-8u6efaq1lwo6x9a.stackpathdns.com/wp-content/uploads/2017/08/pizza-vegan-1280x640.jpg"))
+
         FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("Party frocks",
                 "Clothes of your dreams",
                 "Odel",
                 "https://www.dhresource.com/0x0s/f2-albu-g5-M00-C1-99-rBVaJFhozYiATXqgAAH1iciKmqo369.jpg/2017-spring-kids-birthday-baby-party-wear.jpg"))
+
+        FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("Some Pizza",
+                "You will never get a discount like this!",
+                "CrazyHut",
+                "https://livekindlyproduction-8u6efaq1lwo6x9a.stackpathdns.com/wp-content/uploads/2017/08/pizza-vegan-1280x640.jpg"))
+
+        FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("Maxi Skirt and Deep Cut Top",
+                "Black and Navy Blue Chiffon Printed Maxi Skirt and Deep Cut Top",
+                "Zigzag.lk",
+                "https://promolk.blob.core.windows.net/deals/promo.lk-deals-6bac3202c8384801bd198246ea12284e.jpg"))
+
+        FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("Daily Essentials & Household Items",
+                "25% Off on Selected Daily Essentials & Household Items",
+                "Arpico Supercentre",
+                "http://discount365.lk/wp-content/uploads/2018/06/arpico-discount-and-offers-1024x1024.jpg"))
+
+        FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("50% off",
+                "50% off – Cotton Collection Plus",
+                "Cotton Collection ",
+                "http://discount365.lk/wp-content/uploads/2018/06/cotton-collection-plus-50-discount-1024x1024.jpg"))
+
+        FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("SHORES OF EUROPE",
+                "50% off – SHORES OF EUROPE",
+                "Jetwing Travels",
+                "http://discount365.lk/wp-content/uploads/2018/06/travel-offer-discount365.lk_-796x1024.jpg"))
+
+        FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("25% off – Fly to Hambantota",
+                "Fly swiftly and comfortably between Colombo and Hambantota on our scheduled flights and enjoy a 25% discount valid upto 30th June 2018.",
+                "Cinnamon Air",
+                "http://discount365.lk/wp-content/uploads/2018/05/fly-hambantota-cinnaman-air-discount365-1024x532.jpg"))
+
+        FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("30% Savings on food",
+                "NDB Credit Cards 30% Savings on food on Cafe Bagatalle Dine Now",
+                "Cafe Bagatalle",
+                "http://discount365.lk/wp-content/uploads/2018/05/Cafe-Bagatalle_Discount365_Offers_Discounts_Promotions_Deals_Colombo_Sri-Lanka-1024x863.jpg"))
+
+        FirebaseDatabase.getInstance().getReference("deals").push().setValue(Deal("40% Discount For Vehicle Tyres",
+                "Commercial Bank of Ceylon PLC Up to 40% Discount For Credit & Debit cards Vehicle Tyres",
+                "Commercial Bank Credit & Debit",
+                "http://discount365.lk/wp-content/uploads/2018/02/Commercial-Bank-of-Ceylon-PLC_Discount365_Offers_Discounts_Promotions_Deals_Colombo_Sri-Lanka-1024x535.jpg"))
     }
 
     @JvmStatic
@@ -75,14 +116,8 @@ object Test {
         transaction2.initiatorId = "MThDUb24tsgDIiOqy3rPvYITj9l2"
         transaction2.initiatorName = "Upeksha Liyanage"
 
-        val transaction3 = Transaction(Transaction.Intention.SEND, 123.0)
-        transaction3.title = "Monthly rent"
-        transaction3.description = "Automatic payment"
-        transaction3.initiatorId = "MThDUb24tsgDIiOqy3rPvYITj9l2"
-        transaction3.initiatorName = "Upeksha Liyanage"
 
         FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("log").push().setValue(transaction1)
         FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("log").push().setValue(transaction2)
-        FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("log").push().setValue(transaction3)
     }
 }

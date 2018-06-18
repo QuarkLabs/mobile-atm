@@ -6,22 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import com.ivantha.mobileatm.R
+
 import com.ivantha.mobileatm.common.Session
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
-
-    private var spendingLimitTextView: TextView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        spendingLimitTextView = view.findViewById(R.id.spendingLimitTextView)
-        spendingLimitTextView!!.text = Session.currentUser!!.account!!.spendingLimit.toString()
+//        spendingLimitTextView!!.text = Session.currentUser!!.account!!.spendingLimit.toString()
 
         // Inflate the layout for this fragment
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        spendingLimitTextView!!.text = Session.currentUser!!.account!!.spendingLimit.toString()
     }
 
     companion object {
