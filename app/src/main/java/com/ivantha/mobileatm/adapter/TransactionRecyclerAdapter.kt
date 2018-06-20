@@ -12,6 +12,8 @@ import android.widget.TextView
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.model.Transaction
 import com.squareup.picasso.Picasso
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 
 class TransactionRecyclerAdapter(private val transactions: List<Transaction>, private var context: Context) : RecyclerView.Adapter<TransactionRecyclerAdapter.TransactionViewHolder>() {
 
@@ -25,7 +27,7 @@ class TransactionRecyclerAdapter(private val transactions: List<Transaction>, pr
         Picasso.with(context).load(transactions[position].profileImageUrl).fit().centerCrop().into(holder.initiatorImageView)
         holder.transactionAmountTextView.text = transactions[position].amount.toString()
         holder.initiatorNameTextView.text = transactions[position].initiatorName
-        holder.transactionDateTextView.text = transactions[position].timestamp.toString()
+        holder.transactionDateTextView.text = DateTime(transactions[position].timestamp).toString("yyyy-MM-dd")
         holder.transactionTitleTextView.text = transactions[position].title
         holder.transactionDescriptionTextView.text = transactions[position].description
     }
