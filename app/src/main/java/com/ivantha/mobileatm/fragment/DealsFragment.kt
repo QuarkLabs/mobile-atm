@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.adapter.DealRecyclerAdapter
 import com.ivantha.mobileatm.common.Session
+import kotlinx.android.synthetic.main.fragment_deals.*
+
 
 class DealsFragment : Fragment() {
 
@@ -38,6 +40,19 @@ class DealsFragment : Fragment() {
         recyclerView!!.adapter = dealRecyclerAdapter
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dealsSwipeRefreshLayout.setOnRefreshListener {
+            refreshView()
+        }
+    }
+
+    private fun refreshView() {
+        dealRecyclerAdapter!!.notifyDataSetChanged()
+        dealsSwipeRefreshLayout.isRefreshing = false;
     }
 
     companion object {
