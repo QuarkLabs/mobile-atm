@@ -69,8 +69,8 @@ object Test {
 
         FirebaseDatabase.getInstance().getReference("users").child("qsp8g1byz5hs84xzDywfCtmc2P72").setValue(user1)
         FirebaseDatabase.getInstance().getReference("users").child("MThDUb24tsgDIiOqy3rPvYITj9l2").setValue(user2)
-        FirebaseDatabase.getInstance().getReference("users").child("MThDUb24tsgDIiOqy3rPvYITj9l2").setValue(user3)
-        FirebaseDatabase.getInstance().getReference("users").child("MThDUb24tsgDIiOqy3rPvYITj9l2").setValue(user4)
+        FirebaseDatabase.getInstance().getReference("users").child("e1umZsfxvIehuMy9lEBl0SGazhz2").setValue(user3)
+        FirebaseDatabase.getInstance().getReference("users").child("KU82kJRkn9fMjiOZ6ZFss10wws63").setValue(user4)
     }
 
     @JvmStatic
@@ -133,70 +133,60 @@ object Test {
         transaction1.description = "A random transaction"
         transaction1.initiatorId = "MThDUb24tsgDIiOqy3rPvYITj9l2"
         transaction1.initiatorName = "Upeksha Liyanage"
-        transaction1.profileImageUrl = "https://preview.ibb.co/douakJ/upeksha.jpg"
 
         val transaction2 = Transaction(Transaction.Intention.SEND, 4.50)
         transaction2.title = "2nd"
         transaction2.description = "The second transaction"
         transaction2.initiatorId = "MThDUb24tsgDIiOqy3rPvYITj9l2"
         transaction2.initiatorName = "Upeksha Liyanage"
-        transaction2.profileImageUrl = "https://preview.ibb.co/douakJ/upeksha.jpg"
 
         val transaction3 = Transaction(Transaction.Intention.SEND, 123.0)
         transaction3.title = "Monthly rent"
         transaction3.description = "Automatic payment"
         transaction3.initiatorId = "MThDUb24tsgDIiOqy3rPvYITj9l2"
         transaction3.initiatorName = "Upeksha Liyanage"
-        transaction3.profileImageUrl = "https://preview.ibb.co/douakJ/upeksha.jpg"
 
         val transaction4 = Transaction(Transaction.Intention.REQUEST, 60.0)
         transaction4.title = "Family shares"
         transaction4.description = "Monthly share"
         transaction4.initiatorId = "e1umZsfxvIehuMy9lEBl0SGazhz2"
         transaction4.initiatorName = "Sumedhe Dissanayake"
-        transaction4.profileImageUrl = "https://image.ibb.co/kxuKCy/sumedhe.jpg"
 
         val transaction5 = Transaction(Transaction.Intention.SEND, 98.0)
         transaction5.title = "Monthly rent"
         transaction5.description = "Automatic payment"
         transaction5.initiatorId = "KU82kJRkn9fMjiOZ6ZFss10wws63"
         transaction5.initiatorName = "Pramodya Abeysinghe"
-        transaction5.profileImageUrl = "https://preview.ibb.co/fufLKd/pramodya.jpg"
 
         val transaction6 = Transaction(Transaction.Intention.REQUEST, 105.0)
         transaction6.title = "Phone bill"
         transaction6.description = "Mobitel monthly rental"
         transaction6.initiatorId = "MThDUb24tsgDIiOqy3rPvYITj9l2"
         transaction6.initiatorName = "Upeksha Liyanage"
-        transaction6.profileImageUrl = "https://preview.ibb.co/douakJ/upeksha.jpg"
 
         val transaction7 = Transaction(Transaction.Intention.SEND, 220.0)
         transaction7.title = "Water bill"
         transaction7.description = "Automatic utility payment monthly"
         transaction7.initiatorId = "e1umZsfxvIehuMy9lEBl0SGazhz2"
         transaction7.initiatorName = "Sumedhe Dissanayake"
-        transaction7.profileImageUrl = "https://image.ibb.co/kxuKCy/sumedhe.jpg"
 
         val transaction8 = Transaction(Transaction.Intention.SEND, 40.0)
         transaction8.title = "Recharge"
         transaction8.description = "Dialog recharge"
         transaction8.initiatorId = "e1umZsfxvIehuMy9lEBl0SGazhz2"
         transaction8.initiatorName = "Sumedhe Dissanayake"
-        transaction8.profileImageUrl = "https://image.ibb.co/kxuKCy/sumedhe.jpg"
 
         val transaction9 = Transaction(Transaction.Intention.REQUEST, 65.0)
         transaction9.title = "Insurance premuim"
         transaction9.description = "Annual premium"
         transaction9.initiatorId = "MThDUb24tsgDIiOqy3rPvYITj9l2"
         transaction9.initiatorName = "Upeksha Liyanage"
-        transaction9.profileImageUrl = "https://preview.ibb.co/douakJ/upeksha.jpg"
 
         val transaction10 = Transaction(Transaction.Intention.SEND, 250.0)
         transaction10.title = "School fees"
         transaction10.description = "Term fees for school"
         transaction10.initiatorId = "KU82kJRkn9fMjiOZ6ZFss10wws63"
         transaction10.initiatorName = "Pramodya Abeysinghe"
-        transaction10.profileImageUrl = "https://preview.ibb.co/fufLKd/pramodya.jpg"
 
         FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("log").push().setValue(transaction1)
         FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("log").push().setValue(transaction3)

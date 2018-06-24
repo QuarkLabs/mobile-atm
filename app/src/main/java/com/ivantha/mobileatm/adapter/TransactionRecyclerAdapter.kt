@@ -24,7 +24,7 @@ class TransactionRecyclerAdapter(private val transactions: List<Transaction>, pr
     }
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
-        Picasso.with(context).load(transactions[position].profileImageUrl).fit().centerCrop().into(holder.initiatorImageView)
+        Picasso.with(context).load("https://image.ibb.co/kJ5bsy/user.png").fit().centerCrop().into(holder.initiatorImageView)
         holder.transactionAmountTextView.text = transactions[position].amount.toString()
         holder.initiatorNameTextView.text = transactions[position].initiatorName
         holder.transactionDateTextView.text = DateTime(transactions[position].timestamp).toString("yyyy-MM-dd")

@@ -15,9 +15,6 @@ class Transaction : Serializable {
     var initiatorName: String? = null
     var receiverId: String? = null
 
-    // Should be deleted later
-    var profileImageUrl: String = "https://image.ibb.co/kJ5bsy/user.png"
-
     /**
      * Intention of starting the transaction
      */
