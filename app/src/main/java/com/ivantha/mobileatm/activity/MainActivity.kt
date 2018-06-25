@@ -166,6 +166,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when (id) {
             R.id.nav_home -> fragment = HomeFragment.newInstance()
+            R.id.nav_payment -> fragment = PaymentFragment.newInstance()
             R.id.nav_utility_bills -> fragment = BillsFragment.newInstance()
             R.id.nav_deals -> fragment = DealsFragment.newInstance()
             R.id.nav_history -> fragment = HistoryFragment.newInstance()
