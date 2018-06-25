@@ -30,12 +30,4 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_monetization_on_white_50dp" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/startTransactionFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_local_atm_black_24dp" />
-
 </android.support.design.widget.CoordinatorLayout>

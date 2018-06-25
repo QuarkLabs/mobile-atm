@@ -63,33 +63,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        // Start new transaction
-        startTransactionFab.setOnClickListener {
-            val transaction = Transaction(Transaction.Intention.SEND, 1.0)
-            transaction.title = "Test"
-            transaction.description = "A random transaction"
-            transaction.initiatorId = "MThDUb24tsgDIiOqy3rPvYITj9l2"
-            transaction.initiatorName = "Upeksha Liyanage"
-
-            val message = TransactionServices.transactionToJson(transaction)
-            val multiFormatWriter = MultiFormatWriter()
-            try {
-                val bitMatrix: BitMatrix = multiFormatWriter.encode(message, BarcodeFormat.QR_CODE, 1000, 1000)
-                val barcodeEncoder = BarcodeEncoder()
-                val bitmap: Bitmap = barcodeEncoder.createBitmap(bitMatrix)
-
-                val imageView = ImageView(baseContext)
-                imageView.setImageBitmap(bitmap)
-
-                val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-                        .setMessage(message)
-                        .setView(imageView)
-                builder.create().show()
-            } catch (e: WriterException) {
-                e.printStackTrace()
-            }
-        }
-
         // Process incoming transaction
         processTransactionFab.setOnClickListener {
             val intentIntegrator = IntentIntegrator(this@MainActivity)
