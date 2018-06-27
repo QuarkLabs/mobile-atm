@@ -36,4 +36,14 @@
     <string name="lbl_header_accSettings">Wallet Preferences</string>
     <string name="lbl_acc_seed">IOTA Seed</string>
     <string name="btn_acc_save">Save</string>
+    <string name="lbl_utility_water">Water</string>
+    <string name="lbl_utility_electricity">Electricity</string>
+    <string name="lbl_utility_phone">Telephone</string>
+    <string name="lbl_utility_internet">Internet</string>
+    <string name="lbl_utility_leasing">Leasing</string>
+    <string name="lbl_utility_insurance">Insurance</string>
+    <string name="lbl_utility_gas">Gas</string>
+    <string name="lbl_utility_fuel">Fuel</string>
+    <string name="lbl_utility_education">Education</string>
+    <string name="lbl_utility_medical">Medical</string>
 </resources>
