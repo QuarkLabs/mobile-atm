@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:layout_marginEnd="5dp"
-android:layout_marginStart="5dp"
-android:orientation="vertical"
-tools:context=".fragment.BillsFragment">
-
-<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
-
+    android:layout_height="match_parent"
+    android:layout_marginEnd="5dp"
+    android:layout_marginStart="5dp"
     android:orientation="vertical"
-    android:padding="10dp">
+    tools:context=".fragment.BillsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -33,10 +28,9 @@ tools:context=".fragment.BillsFragment">
                 android:id="@+id/btn_utility_water"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:background="@null"
-                android:contentDescription="tap inside house"
+                android:contentDescription="@string/lbl_utility_water"
                 android:cropToPadding="false"
                 android:padding="10dp"
                 android:saveEnabled="false"
@@ -47,14 +41,14 @@ tools:context=".fragment.BillsFragment">
                 android:id="@+id/lbl_utility_water"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Water"
+                android:text="@string/lbl_utility_water"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -62,9 +56,9 @@ tools:context=".fragment.BillsFragment">
                 android:id="@+id/btn_utility_electricity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:background="@null"
+                android:contentDescription="@string/lbl_utility_electricity"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_utility_electricity" />
@@ -73,14 +67,14 @@ tools:context=".fragment.BillsFragment">
                 android:id="@+id/lbl_utility_electricity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Electricity"
+                android:text="@string/lbl_utility_electricity"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -88,9 +82,9 @@ tools:context=".fragment.BillsFragment">
                 android:id="@+id/btn_utility_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:background="@null"
+                android:contentDescription="@string/lbl_utility_phone"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_utility_phone" />
@@ -99,14 +93,14 @@ tools:context=".fragment.BillsFragment">
                 android:id="@+id/lbl_utility_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Telephone"
+                android:text="@string/lbl_utility_phone"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -114,9 +108,9 @@ tools:context=".fragment.BillsFragment">
                 android:id="@+id/btn_utility_broadband"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:background="@null"
+                android:contentDescription="@string/lbl_utility_internet"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_utility_internet" />
@@ -125,259 +119,237 @@ tools:context=".fragment.BillsFragment">
                 android:id="@+id/lbl_utility_internet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Internet"
+                android:text="@string/lbl_utility_internet"
                 android:textAlignment="center" />
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_margin="20dp"
+        android:baselineAligned="true"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btn_utility_leasing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:contentDescription="@string/lbl_utility_leasing"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_utility_leasing" />
 
-                <ImageButton
-                    android:id="@+id/btn_utility_leasing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_utility_leasing" />
+            <TextView
+                android:id="@+id/lbl_utility_leasing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_utility_leasing"
+                android:textAlignment="center" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/lbl_utility_leasing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Leasing"
-                    android:textAlignment="center" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btn_utility_insurance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:contentDescription="@string/lbl_utility_insurance"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_utility_insurance" />
 
-                <ImageButton
-                    android:id="@+id/btn_utility_insurance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_utility_insurance" />
+            <TextView
+                android:id="@+id/lbl_utility_insurance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_utility_insurance"
+                android:textAlignment="center" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/lbl_utility_insurance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Insuarance"
-                    android:textAlignment="center" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btn_utility_gas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:contentDescription="@string/lbl_utility_gas"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_utility_gas" />
 
-                <ImageButton
-                    android:id="@+id/btn_utility_gas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_utility_gas" />
+            <TextView
+                android:id="@+id/lbl_utility_gas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_utility_gas"
+                android:textAlignment="center" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/lbl_utility_gas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Gas"
-                    android:textAlignment="center" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btn_utility_fuel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:contentDescription="@string/lbl_utility_fuel"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_utility_fuel" />
 
-                <ImageButton
-                    android:id="@+id/btn_utility_fuel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_utility_fuel" />
-
-                <TextView
-                    android:id="@+id/lbl_utility_fuel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Fuel Station"
-                    android:textAlignment="center" />
-            </LinearLayout>
-
+            <TextView
+                android:id="@+id/lbl_utility_fuel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_utility_fuel"
+                android:textAlignment="center" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:baselineAligned="true"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btn_utility_education"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:contentDescription="@string/lbl_utility_education"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_utility_education" />
 
-                <ImageButton
-                    android:id="@+id/btn_utility_education"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_utility_education" />
+            <TextView
+                android:id="@+id/lbl_utility_education"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_utility_education"
+                android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/lbl_utility_education"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Education"
-                    android:textAlignment="center" />
+        </LinearLayout>
 
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btn_utility_medical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:contentDescription="@string/lbl_utility_medical"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_utility_medical" />
 
-                <ImageButton
-                    android:id="@+id/btn_utility_medical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_utility_medical" />
+            <TextView
+                android:id="@+id/lbl_utility_medical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_utility_medical"
+                android:textAlignment="center" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/lbl_utility_medical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Medical"
-                    android:textAlignment="center" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btn_utility_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:cropToPadding="false"
+                android:padding="5dp"
+                android:saveEnabled="false"
+                android:scaleType="fitCenter"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_utility_water" />
 
-                <ImageButton
-                    android:id="@+id/btn_utility_empty"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:contentDescription="tap inside house"
-                    android:cropToPadding="false"
-                    android:padding="5dp"
-                    android:saveEnabled="false"
-                    android:scaleType="fitCenter"
-                    android:visibility="invisible"
-                    app:srcCompat="@drawable/ic_utility_water" />
+            <TextView
+                android:id="@+id/lbl_utility_empty1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/lbl_utility_empty1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Water"
-                    android:textAlignment="center"
-                    android:visibility="invisible" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btn_utility_empty2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_utility_electricity" />
 
-                <ImageButton
-                    android:id="@+id/btn_utility_empty2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:padding="5dp"
-                    android:scaleType="fitCenter"
-                    android:visibility="invisible"
-                    app:srcCompat="@drawable/ic_utility_electricity" />
-
-                <TextView
-                    android:id="@+id/lbl_utility_empty2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Electricity"
-                    android:textAlignment="center"
-                    android:visibility="invisible" />
-            </LinearLayout>
-
+            <TextView
+                android:id="@+id/lbl_utility_empty2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:visibility="invisible" />
         </LinearLayout>
 
     </LinearLayout>
