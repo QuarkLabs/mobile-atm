@@ -9,4 +9,6 @@ class Account : Serializable {
 
     var spendingLimitEnable = true
     var spendingLimit: Double = 0.0
+
+
 }

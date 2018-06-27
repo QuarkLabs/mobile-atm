@@ -1,5 +1,7 @@
 package com.ivantha.mobileatm.common
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -26,6 +28,8 @@ object Session {
     // Transactions
     var transactions: HashMap<String, Transaction> = HashMap()
 
+
+
     /**
      * Initialize the session variable and functions
      */
@@ -44,4 +48,5 @@ object Session {
     fun updateUser(): Unit {
         FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(currentUser)
     }
+
 }

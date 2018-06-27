@@ -46,4 +46,5 @@
     <string name="lbl_utility_fuel">Fuel</string>
     <string name="lbl_utility_education">Education</string>
     <string name="lbl_utility_medical">Medical</string>
+    <string name="btn_acc_choose">Choose</string>
 </resources>

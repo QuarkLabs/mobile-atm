@@ -1,5 +1,6 @@
 package com.ivantha.mobileatm.activity
 
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
@@ -58,6 +59,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         setContentView(R.layout.activity_main)
+
+        //set application context
+        MainActivity.context = getApplicationContext()
 
         // Set toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -267,5 +271,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         @get:Synchronized
         var mainActivity: MainActivity? = null
             private set
+
+        //Application Context - to use in fragments
+        @JvmField
+        var context: Context? = null
+
+        // Not really needed since we can access the variable directly.
+        @JvmStatic fun getAppContext(): Context? {
+            return context
+        }
     }
+
 }
