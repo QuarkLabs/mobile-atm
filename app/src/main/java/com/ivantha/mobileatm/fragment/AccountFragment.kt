@@ -27,12 +27,23 @@ import com.google.android.gms.tasks.OnSuccessListener
 import java.util.UUID.randomUUID
 import android.app.ProgressDialog
 import android.graphics.BitmapFactory
+import android.util.Log
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.request.RequestOptions
+import com.firebase.ui.storage.images.FirebaseImageLoader
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import retrofit2.http.Url
 import java.net.URL
 import java.util.*
 
 
 class AccountFragment : Fragment() {
+    private val TAG:String="AccountFragment"
     private var filePath: Uri? = null
     private val PICK_IMAGE_REQUEST = 71
 
@@ -40,9 +51,13 @@ class AccountFragment : Fragment() {
     var storage: FirebaseStorage? = null
     var storageReference: StorageReference? = null
 
+    // Points to 'profiles'
+    var profilesRef:StorageReference? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage!!.getReference();
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage!!.getReference()
+        profilesRef= storageReference!!.child("profiles")
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_account, container, false)
@@ -59,13 +74,26 @@ class AccountFragment : Fragment() {
             fragmentAccountSpendingLimitEditText.setText(Session.currentUser!!.account!!.spendingLimit.toString())
             fragmentAccountEnableSpendingLimitSwitch.isChecked = Session.currentUser!!.account!!.spendingLimitEnable
 
-            /*var url: URL = URL(Session.currentUser?.photoURL)
-            if(url!=null){
+            var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
-                var bmp:Bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                fragmentAccountImage.setImageBitmap(bmp)
-            }*/
 
+            var fileName: String? = user?.uid
+            var profilePicture = profilesRef!!.child(fileName!!)
+
+            Log.d(TAG, "*********************" + profilePicture.downloadUrl.toString())
+
+
+            //var url: URL = URL("https://firebasestorage.googleapis.com/v0/b/mobile-atm-10742.appspot.com/o/profiles%2FMThDUb24tsgDIiOqy3rPvYITj9l2?alt=media&token=db655229-7f3a-41af-af46-0b4427d45c54")
+            var options:RequestOptions = RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.app_logo)
+                .priority(Priority.HIGH)
+
+            Glide.with(this /* context */)
+                    .asBitmap()
+                    .load(profilePicture)
+                    .apply(options)
+                    .into(fragmentAccountImage)
         }
 
         fragmentAccountSaveButton.setOnClickListener {
@@ -79,8 +107,8 @@ class AccountFragment : Fragment() {
 
                 uploadImage()
 
-                //Session.updateUser()
-                //Toast.makeText(activity, "Updated", Toast.LENGTH_LONG).show()
+                Session.updateUser()
+                Toast.makeText(activity, "Updated", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -106,26 +134,27 @@ class AccountFragment : Fragment() {
     private fun uploadImage() {
 
         if (filePath != null) {
-            val progressDialog = ProgressDialog(MainActivity.context)
-            progressDialog.setTitle("Uploading...")
-            progressDialog.show()
-
-            val ref = storageReference!!.child("profiles/" + UUID.randomUUID().toString())
+            //val progressDialog = ProgressDialog(MainActivity.context)
+            //progressDialog.setTitle("Uploading...")
+            //progressDialog.show()
+            var user:FirebaseUser?  = FirebaseAuth.getInstance().currentUser
+            val ref = profilesRef!!.child(user?.uid!!)
             ref.putFile(filePath!!)
                     .addOnSuccessListener {taskSnapshot ->
-                        progressDialog.dismiss()
-                        Session.currentUser!!.photoURL=taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
-                        Session.updateUser()
-                        Toast.makeText(MainActivity.context, "Uploaded", Toast.LENGTH_SHORT).show()
+                        //progressDialog.dismiss()
+                        //Session.currentUser!!.photoURL=taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
+                        Log.d(TAG, "*********************" +taskSnapshot.metadata!!.reference!!.downloadUrl.toString())
+                        //Session.updateUser()
+                        //Toast.makeText(MainActivity.context, "Uploaded", Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener { e ->
-                        progressDialog.dismiss()
+                        //progressDialog.dismiss()
                         Toast.makeText(MainActivity.context, "Failed " + e.message, Toast.LENGTH_SHORT).show()
                     }
                     .addOnProgressListener { taskSnapshot ->
                         val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot
                                 .totalByteCount
-                        progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+                        //progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                     }
         }
     }

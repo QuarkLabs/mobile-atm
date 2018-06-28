@@ -10,5 +10,5 @@ class User : Serializable {
     var seed: String? = null
 
     var account: Account? = null
-    var photoURL: String? = null
+    //var photoURL: String? = null
 }

@@ -52,6 +52,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf:16.0.0'
     implementation 'com.google.firebase:firebase-config:16.0.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
+    implementation 'com.firebaseui:firebase-ui-storage:3.2.1'
     implementation 'com.android.volley:volley:1.1.0'
     implementation 'com.github.iotaledger:iota~lib~java:0.9.10'
     implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
@@ -60,6 +61,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'net.danlew:android.joda:2.9.9.3'
     implementation 'com.google.code.gson:gson:2.8.2'
+    kapt  'com.github.bumptech.glide:compiler:4.0.0-RC0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -68,3 +70,5 @@ dependencies {
 apply plugin: 'com.google.gms.google-services'
 
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
