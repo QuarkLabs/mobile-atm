@@ -18,6 +18,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
+import com.afollestad.materialdialogs.MaterialDialog
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -264,6 +265,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (requestQueue != null) {
             requestQueue!!.cancelAll(tag)
         }
+    }
+
+    fun showFCM(title: String, body: String) {
+        MaterialDialog.Builder(MainActivity@this)
+                .title(title)
+                .content(body)
+                .positiveText("OK")
+                .show()
     }
 
     companion object {
