@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonPrimitive
@@ -104,6 +105,7 @@ class LoginActivity : AppCompatActivity() {
         initCurrentUser()
         initDeals()
         initTransactions()
+        subscribeToMessages()
 
         val handler = Handler()
         val runnableCode = object : Runnable {
@@ -203,5 +205,19 @@ class LoginActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    /**
+     * Subscribe to Firebase Cloud Messages
+     */
+    private fun subscribeToMessages() {
+        FirebaseMessaging.getInstance().subscribeToTopic(FirebaseAuth.getInstance()!!.currentUser!!.uid)
+                .addOnCompleteListener { task ->
+                    var msg = "Successfully subscribed to FCM"
+                    if (!task.isSuccessful) {
+                        msg = "FCM subscribe unsuccessful"
+                    }
+                    Toast.makeText(this@LoginActivity, msg, Toast.LENGTH_SHORT).show()
+                }
     }
 }

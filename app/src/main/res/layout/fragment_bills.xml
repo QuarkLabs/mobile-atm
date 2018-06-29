@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_water"
+                android:id="@+id/utilityFragmentWaterButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -53,7 +53,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_electricity"
+                android:id="@+id/utilityFragmentElectricityButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -79,7 +79,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_phone"
+                android:id="@+id/utilityFragmentPhoneButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -105,7 +105,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_broadband"
+                android:id="@+id/utilityFragmentInternetButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -140,7 +140,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_leasing"
+                android:id="@+id/utilityFragmentLeasingButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -166,7 +166,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_insurance"
+                android:id="@+id/utilityFragmentInsuranceButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -192,7 +192,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_gas"
+                android:id="@+id/utilityFragmentGasButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -218,7 +218,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_fuel"
+                android:id="@+id/utilityFragmentFuelButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -253,7 +253,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_education"
+                android:id="@+id/utilityFragmentEducationButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -280,7 +280,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_utility_medical"
+                android:id="@+id/utilityFragmentMedicalButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
