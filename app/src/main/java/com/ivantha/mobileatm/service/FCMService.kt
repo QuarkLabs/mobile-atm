@@ -1,11 +1,11 @@
 package com.ivantha.mobileatm.service
 
 import android.os.Handler
-import android.widget.Toast
+
+import android.os.Looper
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import android.os.Looper
-
+import com.ivantha.mobileatm.activity.MainActivity
 
 
 
@@ -17,13 +17,13 @@ class FCMService : FirebaseMessagingService() {
 
         if (remoteMessage!!.notification != null) {
             handler.post {
-                Toast.makeText(applicationContext, "Message Notification Body: " + remoteMessage.notification!!.body, Toast.LENGTH_LONG).show()
-            }
-        }
 
-        if (remoteMessage.data.size > 0) {
+                MainActivity.mainActivity?.showFCM(remoteMessage.notification!!.title!!, remoteMessage.notification!!.body!!)
+            }
+        } else if (remoteMessage.data.size > 0) {
             handler.post {
-                Toast.makeText(applicationContext, "Message data payload: " + remoteMessage.data, Toast.LENGTH_LONG).show()
+                MainActivity.mainActivity?.showFCM(remoteMessage.data["title"]!!, remoteMessage.data["body"]!!)
+
             }
         }
     }

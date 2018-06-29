@@ -152,7 +152,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/lbl_acc_unverfiedBalance"
@@ -164,8 +165,8 @@
                 android:id="@+id/txt_acc_unverfiedBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginStart="16dp"
+                android:layout_weight="1"
                 android:ems="10"
                 android:inputType="numberDecimal"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
@@ -206,16 +207,18 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lbl_acc_spendingLimit" />
 
-            <EditText
+            <SeekBar
+                android:id="@+id/fragmentAccountSpendingLimitSeekBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5" />
+
+            <TextView
                 android:id="@+id/fragmentAccountSpendingLimitEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+                android:text="0" />
 
         </LinearLayout>
 
