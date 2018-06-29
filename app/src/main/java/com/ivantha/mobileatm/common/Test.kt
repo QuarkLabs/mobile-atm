@@ -13,7 +13,7 @@ object Test {
         clearData()
         addUsers()
         addDeals()
-        addLogs()
+//        addLogs()
     }
 
     @JvmStatic

@@ -9,12 +9,6 @@
             android:summary="Display notifications"
             android:title="Notifications" />
 
-        <android.support.v7.preference.SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:key="settings_sound"
-            android:summary="Enable app sounds"
-            android:title="Sound" />
-
     </android.support.v7.preference.PreferenceCategory>
 
 </android.support.v7.preference.PreferenceScreen>

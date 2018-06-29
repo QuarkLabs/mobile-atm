@@ -2,48 +2,30 @@ package com.ivantha.mobileatm.fragment
 
 
 import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.ivantha.mobileatm.R
-import com.ivantha.mobileatm.common.Session
-import kotlinx.android.synthetic.main.fragment_account.*
-import android.content.Intent
-import android.provider.MediaStore
-import android.graphics.Bitmap
-import com.ivantha.mobileatm.activity.MainActivity
-import java.io.IOException
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
-import com.google.firebase.storage.OnProgressListener
-import android.support.annotation.NonNull
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import java.util.UUID.randomUUID
-import android.app.ProgressDialog
-import android.graphics.BitmapFactory
-import android.util.Log
-import com.bumptech.glide.Glide
-import com.bumptech.glide.Priority
-import com.bumptech.glide.request.RequestOptions
-import com.firebase.ui.storage.images.FirebaseImageLoader
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
-import retrofit2.http.Url
-import java.net.URL
-import java.util.*
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.ivantha.mobileatm.R
+import com.ivantha.mobileatm.activity.MainActivity
+import com.ivantha.mobileatm.common.Session
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_account.*
+import java.io.IOException
 
 
 class AccountFragment : Fragment() {
-    private val TAG:String="AccountFragment"
+    private val TAG: String = "AccountFragment"
     private var filePath: Uri? = null
     private val PICK_IMAGE_REQUEST = 71
 
@@ -52,12 +34,12 @@ class AccountFragment : Fragment() {
     var storageReference: StorageReference? = null
 
     // Points to 'profiles'
-    var profilesRef:StorageReference? = null
+    var profilesRef: StorageReference? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         storage = FirebaseStorage.getInstance()
         storageReference = storage!!.getReference()
-        profilesRef= storageReference!!.child("profiles")
+        profilesRef = storageReference!!.child("profiles")
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_account, container, false)
@@ -80,20 +62,13 @@ class AccountFragment : Fragment() {
             var fileName: String? = user?.uid
             var profilePicture = profilesRef!!.child(fileName!!)
 
-            Log.d(TAG, "*********************" + profilePicture.downloadUrl.toString())
 
+            profilePicture.downloadUrl.addOnSuccessListener { uri ->
+                Picasso.with(context).load(uri.toString()).fit().centerCrop().into(fragmentAccountImage);
+            }.addOnFailureListener {
+                // TODO : Handle error
+            }
 
-            //var url: URL = URL("https://firebasestorage.googleapis.com/v0/b/mobile-atm-10742.appspot.com/o/profiles%2FMThDUb24tsgDIiOqy3rPvYITj9l2?alt=media&token=db655229-7f3a-41af-af46-0b4427d45c54")
-            var options:RequestOptions = RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.app_logo)
-                .priority(Priority.HIGH)
-
-            Glide.with(this /* context */)
-                    .asBitmap()
-                    .load(profilePicture)
-                    .apply(options)
-                    .into(fragmentAccountImage)
         }
 
         fragmentAccountSaveButton.setOnClickListener {
@@ -112,7 +87,7 @@ class AccountFragment : Fragment() {
             }
         }
 
-        fragmentAccountChooseButton.setOnClickListener{
+        fragmentAccountChooseButton.setOnClickListener {
             chooseImage()
         }
     }
@@ -137,13 +112,13 @@ class AccountFragment : Fragment() {
             //val progressDialog = ProgressDialog(MainActivity.context)
             //progressDialog.setTitle("Uploading...")
             //progressDialog.show()
-            var user:FirebaseUser?  = FirebaseAuth.getInstance().currentUser
+            var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
             val ref = profilesRef!!.child(user?.uid!!)
             ref.putFile(filePath!!)
-                    .addOnSuccessListener {taskSnapshot ->
+                    .addOnSuccessListener { taskSnapshot ->
                         //progressDialog.dismiss()
                         //Session.currentUser!!.photoURL=taskSnapshot.metadata!!.reference!!.downloadUrl.toString()
-                        Log.d(TAG, "*********************" +taskSnapshot.metadata!!.reference!!.downloadUrl.toString())
+                        Log.d(TAG, "*********************" + taskSnapshot.metadata!!.reference!!.downloadUrl.toString())
                         //Session.updateUser()
                         //Toast.makeText(MainActivity.context, "Uploaded", Toast.LENGTH_SHORT).show()
                     }
