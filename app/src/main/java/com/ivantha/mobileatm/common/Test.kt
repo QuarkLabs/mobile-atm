@@ -10,9 +10,9 @@ import com.ivantha.mobileatm.model.User
 object Test {
     @JvmStatic
     fun addTestData() {
-        clearData()
-        addUsers()
-        addDeals()
+//        clearData()
+//        addUsers()
+//        addDeals()
 //        addLogs()
     }
 

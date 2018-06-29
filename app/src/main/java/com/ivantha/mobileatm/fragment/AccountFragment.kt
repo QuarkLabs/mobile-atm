@@ -29,17 +29,11 @@ class AccountFragment : Fragment() {
     private var filePath: Uri? = null
     private val PICK_IMAGE_REQUEST = 71
 
-    //Firebase
-    var storage: FirebaseStorage? = null
-    var storageReference: StorageReference? = null
-
     // Points to 'profiles'
     var profilesRef: StorageReference? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        storage = FirebaseStorage.getInstance()
-        storageReference = storage!!.getReference()
-        profilesRef = storageReference!!.child("profiles")
+        profilesRef = FirebaseStorage.getInstance().getReference("/profiles")
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_account, container, false)
@@ -56,12 +50,7 @@ class AccountFragment : Fragment() {
             fragmentAccountSpendingLimitEditText.setText(Session.currentUser!!.account!!.spendingLimit.toString())
             fragmentAccountEnableSpendingLimitSwitch.isChecked = Session.currentUser!!.account!!.spendingLimitEnable
 
-            var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
-
-
-            var fileName: String? = user?.uid
-            var profilePicture = profilesRef!!.child(fileName!!)
-
+            var profilePicture = profilesRef!!.child(FirebaseAuth.getInstance().currentUser!!.uid)
 
             profilePicture.downloadUrl.addOnSuccessListener { uri ->
                 Picasso.with(context).load(uri.toString()).fit().centerCrop().into(fragmentAccountImage);
