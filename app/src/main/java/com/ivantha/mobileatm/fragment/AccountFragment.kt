@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -28,12 +29,20 @@ class AccountFragment : Fragment() {
     private val TAG: String = "AccountFragment"
     private var filePath: Uri? = null
     private val PICK_IMAGE_REQUEST = 71
+    // SeekBar Range
+    var MIN = 0
+    var MAX = 100
+    var STEP = 10
+    //Firebase
+    var storage: FirebaseStorage? = null
+    var storageReference: StorageReference? = null
 
     // Points to 'profiles'
     var profilesRef: StorageReference? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         profilesRef = FirebaseStorage.getInstance().getReference("/profiles")
+
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_account, container, false)
@@ -42,12 +51,33 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // set max to seekbar
+        fragmentAccountSpendingLimitSeekBar!!.max = (MAX - MIN) / STEP
+        fragmentAccountSpendingLimitSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
+            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
+                // Display the current progress of SeekBar
+                val progress_custom = MIN + ( i * STEP )
+                fragmentAccountSpendingLimitEditText!!.text = progress_custom.toString()
+                Session.currentUser!!.account!!.spendingLimit = progress_custom.toDouble()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // Do something
+                //Toast.makeText(applicationContext,"start tracking",Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // Do something
+                //Toast.makeText(applicationContext,"stop tracking",Toast.LENGTH_SHORT).show()
+            }
+        })
         if (Session.currentUser != null) {
             fragmentAccountFirstNameEditText.setText(Session.currentUser!!.firstName)
             fragmentAccountLastNameEditText.setText(Session.currentUser!!.lastName)
             fragmentAccountAccountBalanceEditText.setText(Session.currentUser!!.account!!.balance.toString())
-            fragmentAccountSpendingLimitEditText.setText(Session.currentUser!!.account!!.spendingLimit.toString())
+            fragmentAccountSpendingLimitSeekBar.setProgress(Session.currentUser!!.account!!.spendingLimit.toInt())
+            fragmentAccountSpendingLimitTextView.setText(Session.currentUser!!.account!!.spendingLimit.toInt().toString())
             fragmentAccountEnableSpendingLimitSwitch.isChecked = Session.currentUser!!.account!!.spendingLimitEnable
 
             var profilePicture = profilesRef!!.child(FirebaseAuth.getInstance().currentUser!!.uid)
@@ -65,7 +95,7 @@ class AccountFragment : Fragment() {
                 Session.currentUser!!.firstName = fragmentAccountFirstNameEditText.text.toString()
                 Session.currentUser!!.lastName = fragmentAccountLastNameEditText.text.toString()
                 Session.currentUser!!.account!!.balance = fragmentAccountAccountBalanceEditText.text.toString().toDouble()
-                Session.currentUser!!.account!!.spendingLimit = fragmentAccountSpendingLimitEditText.text.toString().toDouble()
+                //Session.currentUser!!.account!!.spendingLimit = fragmentAccountSpendingLimitEditText.text.toString().toDouble()
                 Session.currentUser!!.account!!.spendingLimitEnable = fragmentAccountEnableSpendingLimitSwitch.isChecked
 
 
