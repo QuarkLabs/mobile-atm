@@ -3,7 +3,6 @@ package com.ivantha.mobileatm.activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -16,7 +15,6 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.android.volley.*
@@ -25,16 +23,11 @@ import com.android.volley.toolbox.Volley
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.MultiFormatWriter
-import com.google.zxing.WriterException
-import com.google.zxing.common.BitMatrix
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.fragment.*
 import com.ivantha.mobileatm.model.Transaction
 import com.ivantha.mobileatm.service.TransactionServices
-import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -268,7 +261,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun showFCM(title: String, body: String) {
-        MaterialDialog.Builder(MainActivity@this)
+        MaterialDialog.Builder(MainActivity@ this)
                 .title(title)
                 .content(body)
                 .positiveText("OK")
@@ -286,7 +279,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var context: Context? = null
 
         // Not really needed since we can access the variable directly.
-        @JvmStatic fun getAppContext(): Context? {
+        @JvmStatic
+        fun getAppContext(): Context? {
             return context
         }
     }

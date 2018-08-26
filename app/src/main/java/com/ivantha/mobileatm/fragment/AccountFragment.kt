@@ -29,11 +29,13 @@ class AccountFragment : Fragment() {
     private val TAG: String = "AccountFragment"
     private var filePath: Uri? = null
     private val PICK_IMAGE_REQUEST = 71
+
     // SeekBar Range
     var MIN = 0
     var MAX = 100
     var STEP = 10
-    //Firebase
+
+    // Firebase
     var storage: FirebaseStorage? = null
     var storageReference: StorageReference? = null
 
@@ -57,7 +59,7 @@ class AccountFragment : Fragment() {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
-                val progress_custom = MIN + ( i * STEP )
+                val progress_custom = MIN + (i * STEP)
                 fragmentAccountSpendingLimitEditText!!.text = progress_custom.toString()
                 Session.currentUser!!.account!!.spendingLimit = progress_custom.toDouble()
             }

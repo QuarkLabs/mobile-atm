@@ -5,9 +5,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.ivantha.mobileatm.R
 import android.view.animation.AnimationUtils
+import com.ivantha.mobileatm.R
 import kotlinx.android.synthetic.main.fragment_bills.*
 
 

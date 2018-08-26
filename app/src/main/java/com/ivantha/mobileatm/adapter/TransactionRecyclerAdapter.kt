@@ -8,12 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.model.Transaction
 import com.squareup.picasso.Picasso
 import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 
 class TransactionRecyclerAdapter(private val transactions: List<Transaction>, private var context: Context) : RecyclerView.Adapter<TransactionRecyclerAdapter.TransactionViewHolder>() {
 

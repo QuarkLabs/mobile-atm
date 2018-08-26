@@ -14,7 +14,6 @@ import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.ivantha.mobileatm.R
-import com.ivantha.mobileatm.common.Session
 import com.ivantha.mobileatm.model.Transaction
 import com.ivantha.mobileatm.service.TransactionServices
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -37,15 +36,15 @@ class PaymentFragment : Fragment() {
             transaction.initiatorId = FirebaseAuth.getInstance().currentUser!!.uid
             transaction.initiatorName = FirebaseAuth.getInstance().currentUser!!.displayName
 
-            if(paymentFragmentSendRadioButton.isChecked){
+            if (paymentFragmentSendRadioButton.isChecked) {
                 transaction.intention = Transaction.Intention.SEND
-            }else{
+            } else {
                 transaction.intention = Transaction.Intention.REQUEST
             }
 
-            if (paymentFragmentAmountTextView.text.toString().equals("")){
+            if (paymentFragmentAmountTextView.text.toString().equals("")) {
                 transaction.amount = 0.0
-            }else{
+            } else {
                 transaction.amount = paymentFragmentAmountTextView.text.toString().toDouble()
             }
 
