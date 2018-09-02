@@ -15,11 +15,13 @@ import android.widget.SeekBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.activity.MainActivity
 import com.ivantha.mobileatm.common.Session
+import com.ivantha.mobileatm.model.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_account.*
 import java.io.IOException
@@ -42,12 +44,18 @@ class AccountFragment : Fragment() {
     // Points to 'profiles'
     var profilesRef: StorageReference? = null
 
+    //Session
+    var currentUser: User? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        currentUser= this.getArguments()!!.getSerializable("currentUser") as User?
+
         profilesRef = FirebaseStorage.getInstance().getReference("/profiles")
 
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_account, container, false)
+
         return view
     }
 
@@ -61,7 +69,7 @@ class AccountFragment : Fragment() {
                 // Display the current progress of SeekBar
                 val progress_custom = MIN + (i * STEP)
                 fragmentAccountSpendingLimitEditText!!.text = progress_custom.toString()
-                Session.currentUser!!.account!!.spendingLimit = progress_custom.toDouble()
+                currentUser!!.account!!.spendingLimit = progress_custom.toDouble()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -74,13 +82,13 @@ class AccountFragment : Fragment() {
                 //Toast.makeText(applicationContext,"stop tracking",Toast.LENGTH_SHORT).show()
             }
         })
-        if (Session.currentUser != null) {
-            fragmentAccountFirstNameEditText.setText(Session.currentUser!!.firstName)
-            fragmentAccountLastNameEditText.setText(Session.currentUser!!.lastName)
-            fragmentAccountAccountBalanceEditText.setText(Session.currentUser!!.account!!.balance.toString())
-            fragmentAccountSpendingLimitSeekBar.setProgress(Session.currentUser!!.account!!.spendingLimit.toInt())
-            fragmentAccountSpendingLimitTextView.setText(Session.currentUser!!.account!!.spendingLimit.toInt().toString())
-            fragmentAccountEnableSpendingLimitSwitch.isChecked = Session.currentUser!!.account!!.spendingLimitEnable
+        if (currentUser != null) {
+            fragmentAccountFirstNameEditText.setText(currentUser!!.firstName)
+            fragmentAccountLastNameEditText.setText(currentUser!!.lastName)
+            fragmentAccountAccountBalanceEditText.setText(currentUser!!.account!!.balance.toString())
+            fragmentAccountSpendingLimitSeekBar.setProgress(currentUser!!.account!!.spendingLimit.toInt())
+            fragmentAccountSpendingLimitTextView.setText(currentUser!!.account!!.spendingLimit.toInt().toString())
+            fragmentAccountEnableSpendingLimitSwitch.isChecked = currentUser!!.account!!.spendingLimitEnable
 
             var profilePicture = profilesRef!!.child(FirebaseAuth.getInstance().currentUser!!.uid)
 
@@ -93,17 +101,17 @@ class AccountFragment : Fragment() {
         }
 
         fragmentAccountSaveButton.setOnClickListener {
-            if (Session.currentUser != null) {
-                Session.currentUser!!.firstName = fragmentAccountFirstNameEditText.text.toString()
-                Session.currentUser!!.lastName = fragmentAccountLastNameEditText.text.toString()
-                Session.currentUser!!.account!!.balance = fragmentAccountAccountBalanceEditText.text.toString().toDouble()
+            if (currentUser != null) {
+                currentUser!!.firstName = fragmentAccountFirstNameEditText.text.toString()
+                currentUser!!.lastName = fragmentAccountLastNameEditText.text.toString()
+                currentUser!!.account!!.balance = fragmentAccountAccountBalanceEditText.text.toString().toDouble()
                 //Session.currentUser!!.account!!.spendingLimit = fragmentAccountSpendingLimitEditText.text.toString().toDouble()
-                Session.currentUser!!.account!!.spendingLimitEnable = fragmentAccountEnableSpendingLimitSwitch.isChecked
+                currentUser!!.account!!.spendingLimitEnable = fragmentAccountEnableSpendingLimitSwitch.isChecked
 
 
                 uploadImage()
 
-                Session.updateUser()
+                updateUser()
                 Toast.makeText(activity, "Updated", Toast.LENGTH_LONG).show()
             }
         }
@@ -168,5 +176,9 @@ class AccountFragment : Fragment() {
             }
 
         }
+    }
+
+    fun updateUser(): Unit {
+        FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(currentUser)
     }
 }

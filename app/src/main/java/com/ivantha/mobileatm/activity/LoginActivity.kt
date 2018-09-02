@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.GsonBuilder
@@ -27,6 +28,7 @@ import org.joda.time.format.ISODateTimeFormat
 class LoginActivity : AppCompatActivity() {
 
     private var firebaseAuth: FirebaseAuth? = null
+    var currentUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +40,8 @@ class LoginActivity : AppCompatActivity() {
         // Navigate to MainActivity if the user is already logged in
         if (firebaseAuth!!.currentUser != null) {
             Toast.makeText(applicationContext, "Already logged in", Toast.LENGTH_SHORT).show()
-
             showMainActivity()
+            Toast.makeText(this@LoginActivity, currentUser.toString(), Toast.LENGTH_SHORT).show()
         } else {
             setContentView(R.layout.activity_login)
         }
@@ -48,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
     fun onClickLoginActivitySignInButton(view: View) {
         var email = loginActivityEmailEditText.text.toString()
         var password = loginActivityPasswordEditText.text.toString()
-
+        //Should check for empty string.. not null?
         if (email != null && password != null) {
             performLoginOrAccountCreation(email, password)
         }
@@ -76,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
     private fun performLogin(email: String, password: String) {
         firebaseAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
+                Toast.makeText(this@LoginActivity, FirebaseAuth.getInstance().currentUser.toString(), Toast.LENGTH_SHORT).show()
                 showMainActivity()
             } else {
                 Toast.makeText(this@LoginActivity, "Authentication failed", Toast.LENGTH_SHORT).show()
@@ -110,13 +113,17 @@ class LoginActivity : AppCompatActivity() {
         val handler = Handler()
         val runnableCode = object : Runnable {
             override fun run() {
-                if (Session.currentUser == null) {
+                if (currentUser == null) {
+                    Toast.makeText(this@LoginActivity, "Waiting for currentUser to be updated....", Toast.LENGTH_SHORT).show()
                     println("Waiting for currentUser to be updated....")
                     handler.postDelayed(this, 200)
                 } else {
                     val myIntent = Intent(this@LoginActivity, MainActivity::class.java)
+                    myIntent.putExtra("currentUser", currentUser);
+
                     this@LoginActivity.startActivity(myIntent)
                 }
+                println("*******************"+currentUser)
             }
         }
         handler.post(runnableCode)
@@ -126,9 +133,12 @@ class LoginActivity : AppCompatActivity() {
      * Initialize current user
      */
     private fun initCurrentUser() {
+        Toast.makeText(this@LoginActivity, FirebaseAuth.getInstance().currentUser!!.uid, Toast.LENGTH_SHORT).show()
         FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Session.currentUser = dataSnapshot.getValue(User::class.java)
+                currentUser = dataSnapshot.getValue(User::class.java)
+                println("******************* data"+currentUser)
+                Toast.makeText(this@LoginActivity, currentUser.toString(), Toast.LENGTH_SHORT).show()
             }
 
             override fun onCancelled(error: DatabaseError) {

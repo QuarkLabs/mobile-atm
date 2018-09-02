@@ -7,11 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.common.Session
+import com.ivantha.mobileatm.model.User
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
+    //Session
+    var currentUser: User? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        currentUser= this.getArguments()!!.getSerializable("currentUser") as User?
+        print(currentUser)
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
 //        spendingLimitTextView!!.text = Session.currentUser!!.account!!.spendingLimit.toString()
@@ -22,8 +27,9 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        spendingLimitTextView!!.text = Session.currentUser!!.account!!.spendingLimit.toString()
+        currentUser= this.getArguments()!!.getSerializable("currentUser") as User?
+        println("*******************"+currentUser)
+        spendingLimitTextView!!.text = currentUser!!.account!!.spendingLimit.toString()
     }
 
     companion object {
