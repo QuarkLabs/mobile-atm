@@ -15,6 +15,8 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.android.volley.*
@@ -23,21 +25,28 @@ import com.android.volley.toolbox.Volley
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ivantha.mobileatm.R
 import com.ivantha.mobileatm.fragment.*
 import com.ivantha.mobileatm.model.Transaction
+import com.ivantha.mobileatm.model.User
 import com.ivantha.mobileatm.service.TransactionServices
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
+    var currentUser: User? = null
+
+
     private val requestQueue: RequestQueue? = null
         get() {
             if (field == null) {
@@ -48,7 +57,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        currentUser= getIntent().getSerializableExtra("currentUser") as User?;
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
@@ -81,11 +90,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
         val fragment = HomeFragment.newInstance()
+        //Pass login data
+        val bundle = Bundle()
+        println("*******************"+currentUser)
+        bundle.putSerializable("currentUser", currentUser )
+        fragment?.setArguments(bundle)
+
         transaction.replace(R.id.container, fragment)
         transaction.commit()
 
         // Set Picasso debugging
         Picasso.with(baseContext).setIndicatorsEnabled(true)
+
+        //updateUI
+        updateProfileUI()
 
         mainActivity = this@MainActivity
     }
@@ -144,6 +162,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_account -> fragment = AccountFragment.newInstance()
             R.id.nav_settings -> fragment = SettingsFragment.newInstance()
         }
+
+        //Pass login data
+        val bundle:Bundle = Bundle()
+        bundle.putSerializable("currentUser", currentUser )
+        fragment?.setArguments(bundle)
+        println("******************* main got?"+currentUser)
         transaction.replace(R.id.container, fragment)
         transaction.commit()
 
@@ -188,16 +212,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     /**
      * Update the UI related to user profile
      */
-    private fun updateProfileUI(user: FirebaseUser?) {
-        if (user != null) {
-            if (user.displayName != null) {
-                navHeaderNameTextView.text = user.displayName
+    private fun updateProfileUI() {// Points to 'profiles'
+        var profilesRef: StorageReference? = FirebaseStorage.getInstance().getReference("/profiles")
+
+        val headerView: View = navigationView.getHeaderView(0)
+
+        Toast.makeText(this@MainActivity, currentUser.toString(), Toast.LENGTH_SHORT).show()
+        if (currentUser != null) {
+            if (currentUser!!.firstName != null) {
+                println("ui"+currentUser!!.firstName)
+                headerView.navHeaderNameTextView.text = currentUser!!.firstName
             }
-            if (user.email != null) {
-                navHeaderEmailTextView.text = user.email
+            if (currentUser!!.email != null) {
+                headerView.navHeaderEmailTextView.text = currentUser!!.email
             }
-            if (user.photoUrl != null) {
-                Picasso.with(this@MainActivity).load(user.photoUrl).fit().centerCrop().into(navHeaderProfileImageView)
+
+            var profilePicture = profilesRef!!.child(FirebaseAuth.getInstance().currentUser!!.uid)
+
+            profilePicture.downloadUrl.addOnSuccessListener { uri ->
+                Picasso.with(context).load(uri.toString()).fit().centerCrop().into( headerView.navHeaderProfileImageView);
+            }.addOnFailureListener {
+                // TODO : Handle error
             }
         }
     }
