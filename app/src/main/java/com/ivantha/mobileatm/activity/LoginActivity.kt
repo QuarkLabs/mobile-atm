@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.GsonBuilder
@@ -123,7 +122,7 @@ class LoginActivity : AppCompatActivity() {
 
                     this@LoginActivity.startActivity(myIntent)
                 }
-                println("*******************"+currentUser)
+                println("*******************" + currentUser)
             }
         }
         handler.post(runnableCode)
@@ -137,7 +136,7 @@ class LoginActivity : AppCompatActivity() {
         FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 currentUser = dataSnapshot.getValue(User::class.java)
-                println("******************* data"+currentUser)
+                println("******************* data" + currentUser)
                 Toast.makeText(this@LoginActivity, currentUser.toString(), Toast.LENGTH_SHORT).show()
             }
 

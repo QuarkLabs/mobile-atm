@@ -19,8 +19,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.ivantha.mobileatm.R
-import com.ivantha.mobileatm.activity.MainActivity
-import com.ivantha.mobileatm.common.Session
 import com.ivantha.mobileatm.model.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_account.*
@@ -48,7 +46,7 @@ class AccountFragment : Fragment() {
     var currentUser: User? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        currentUser= this.getArguments()!!.getSerializable("currentUser") as User?
+        currentUser = this.getArguments()!!.getSerializable("currentUser") as User?
 
         profilesRef = FirebaseStorage.getInstance().getReference("/profiles")
 
@@ -153,7 +151,7 @@ class AccountFragment : Fragment() {
                     }
                     .addOnFailureListener { e ->
                         //progressDialog.dismiss()
-                        Toast.makeText(MainActivity.context, "Failed " + e.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Failed " + e.message, Toast.LENGTH_SHORT).show()
                     }
                     .addOnProgressListener { taskSnapshot ->
                         val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot
@@ -169,7 +167,7 @@ class AccountFragment : Fragment() {
                 && data != null && data.data != null) {
             filePath = data.data
             try {
-                val bitmap = MediaStore.Images.Media.getBitmap(MainActivity.context!!.getContentResolver(), filePath)
+                val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, filePath)
                 fragmentAccountImage.setImageBitmap(bitmap)
             } catch (e: IOException) {
                 e.printStackTrace()

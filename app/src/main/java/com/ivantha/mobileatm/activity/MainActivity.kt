@@ -1,6 +1,5 @@
 package com.ivantha.mobileatm.activity
 
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +15,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.android.volley.*
@@ -24,7 +22,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.zxing.integration.android.IntentIntegrator
@@ -36,7 +33,6 @@ import com.ivantha.mobileatm.service.TransactionServices
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import org.json.JSONObject
 
@@ -57,14 +53,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentUser= getIntent().getSerializableExtra("currentUser") as User?;
+        currentUser = intent.getSerializableExtra("currentUser") as User?
+
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         setContentView(R.layout.activity_main)
-
-        //set application context
-        MainActivity.context = getApplicationContext()
 
         // Set toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -90,11 +84,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
         val fragment = HomeFragment.newInstance()
+
         //Pass login data
         val bundle = Bundle()
-        println("*******************"+currentUser)
-        bundle.putSerializable("currentUser", currentUser )
-        fragment?.setArguments(bundle)
+        bundle.putSerializable("currentUser", currentUser)
+        fragment.arguments = bundle
 
         transaction.replace(R.id.container, fragment)
         transaction.commit()
@@ -164,10 +158,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         //Pass login data
-        val bundle:Bundle = Bundle()
-        bundle.putSerializable("currentUser", currentUser )
-        fragment?.setArguments(bundle)
-        println("******************* main got?"+currentUser)
+        val bundle = Bundle()
+        bundle.putSerializable("currentUser", currentUser)
+        fragment?.arguments = bundle
+
         transaction.replace(R.id.container, fragment)
         transaction.commit()
 
@@ -220,7 +214,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Toast.makeText(this@MainActivity, currentUser.toString(), Toast.LENGTH_SHORT).show()
         if (currentUser != null) {
             if (currentUser!!.firstName != null) {
-                println("ui"+currentUser!!.firstName)
+                println("ui" + currentUser!!.firstName)
                 headerView.navHeaderNameTextView.text = currentUser!!.firstName
             }
             if (currentUser!!.email != null) {
@@ -230,7 +224,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             var profilePicture = profilesRef!!.child(FirebaseAuth.getInstance().currentUser!!.uid)
 
             profilePicture.downloadUrl.addOnSuccessListener { uri ->
-                Picasso.with(context).load(uri.toString()).fit().centerCrop().into( headerView.navHeaderProfileImageView);
+                Picasso.with(this@MainActivity).load(uri.toString()).fit().centerCrop().into(headerView.navHeaderProfileImageView);
             }.addOnFailureListener {
                 // TODO : Handle error
             }
@@ -308,16 +302,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         @get:Synchronized
         var mainActivity: MainActivity? = null
             private set
-
-        //Application Context - to use in fragments
-        @JvmField
-        var context: Context? = null
-
-        // Not really needed since we can access the variable directly.
-        @JvmStatic
-        fun getAppContext(): Context? {
-            return context
-        }
     }
 
 }
